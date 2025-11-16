@@ -52,13 +52,14 @@
   
   <!-- MAIN CONTENT -->
   <main>
+    <!-- Hero Section -->
+    <section class="tester-hero">
+      <h1>🎮 Trở Thành Người Test Game</h1>
+      <p>Trải nghiệm game mới nhất trước bất kỳ ai khác!<br>Góp ý để giúp chúng tôi phát triển game tốt hơn.</p>
+    </section>
+    
+    <!-- Tester Registration Section -->
     <section class="tester-section">
-      <!-- Hero -->
-      <div class="tester-hero">
-        <h1>🎮 Trở Thành Người Test Game</h1>
-        <p>Trải nghiệm game mới nhất trước bất kỳ ai khác!<br>Góp ý để giúp chúng tôi phát triển game tốt hơn.</p>
-      </div>
-      
       <!-- Flow Steps -->
       <div class="flow-container">
         <div class="flow-step active" id="step1">
@@ -103,7 +104,7 @@
         </div>
       </div>
       
-      <!-- Form -->
+      <!-- Registration Form -->
       <div class="form-container">
         <form id="testerForm">
           <div class="form-group">
@@ -276,6 +277,23 @@
     });
     
     // ==========================================
+    // Handle Google Translate mutation
+    // ==========================================
+    if (typeof MutationObserver !== 'undefined') {
+      const observer = new MutationObserver(function(mutations) {
+        const menuToggle = document.querySelector('.menu-toggle');
+        if (menuToggle && !menuToggle.hasAttribute('data-listener-attached')) {
+          menuToggle.setAttribute('data-listener-attached', 'true');
+        }
+      });
+      
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
+    
+    // ==========================================
     // TESTER FORM LOGIC
     // ==========================================
     const emailInput = document.getElementById('email');
@@ -292,14 +310,12 @@
       const email = e.target.value.trim();
       currentEmail = email;
       
-      // Clear previous states
       emailInput.classList.remove('valid', 'warning');
       emailIcon.textContent = '';
       validationMessage.innerHTML = '';
       previewPanel.classList.remove('show');
       submitBtn.disabled = true;
       
-      // Basic email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         if (email.length > 0) {
@@ -308,7 +324,6 @@
         return;
       }
       
-      // Check email domain
       const domain = email.split('@')[1];
       
       if (domain === 'gmail.com') {
@@ -339,23 +354,15 @@
       document.getElementById('previewEmail2').textContent = email;
       document.getElementById('previewEmail3').textContent = email;
       previewPanel.classList.add('show');
-      
-      // Activate step 2
       document.getElementById('step2').classList.add('active');
     }
     
     // Form submission
     document.getElementById('testerForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      // Save email to localStorage
       localStorage.setItem('tester_email', currentEmail);
       localStorage.setItem('tester_timestamp', new Date().toISOString());
-      
-      // Show modal
       successModal.classList.add('show');
-      
-      // Activate step 3
       document.getElementById('step3').classList.add('active');
     });
     
@@ -368,11 +375,10 @@
     document.getElementById('alreadyJoinedBtn').addEventListener('click', function() {
       successModal.classList.remove('show');
       
-      // TODO: Replace with your actual Google Play testing link
+      // TODO: Thay link này bằng link Google Play testing thật của bạn
       // window.location.href = 'https://play.google.com/apps/testing/com.yourgame.package';
       
-      // Temporary alert
-      alert('🎮 Thay link này bằng link Google Play test của bạn!\n\nVí dụ: https://play.google.com/apps/testing/com.yourgame');
+      alert('🎮 Thay link này bằng link Google Play test của bạn!\n\nVí dụ: https://play.google.com/apps/testing/com.artoongames.yourgame');
     });
     
     // Close modal on outside click
