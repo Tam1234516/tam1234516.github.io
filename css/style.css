@@ -409,6 +409,48 @@ footer p {
 }
 
 /* ==========================================
+   FLOATING CONTACT BUTTON
+========================================== */
+.floating-contact {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(0,164,239,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 999;
+    animation: pulse 2s infinite;
+}
+
+.floating-contact:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(0,164,239,0.6);
+}
+
+.floating-contact img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1);
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(0,164,239,0.4);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(0,164,239,0.7);
+    }
+}
+
+/* ==========================================
    TABLET (768px - 1024px)
 ========================================== */
 @media screen and (max-width: 1024px) {
@@ -467,6 +509,19 @@ footer p {
     .game-promo {
         width: 250px;
         height: 150px;
+    }
+    
+    /* Floating Contact - Tablet */
+    .floating-contact {
+        width: 55px;
+        height: 55px;
+        bottom: 25px;
+        right: 25px;
+    }
+    
+    .floating-contact img {
+        width: 28px;
+        height: 28px;
     }
 }
 
@@ -680,6 +735,19 @@ footer p {
 
     footer p {
         font-size: 13px;
+    }
+    
+    /* Floating Contact - Mobile */
+    .floating-contact {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .floating-contact img {
+        width: 25px;
+        height: 25px;
     }
 }
 
