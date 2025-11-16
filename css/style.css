@@ -178,6 +178,182 @@ main {
 }
 
 /* ==========================================
+   GOOGLE GROUP PANEL (NEW)
+========================================== */
+.group-panel {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: var(--shadow-md);
+    color: var(--text-dark);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #e0e0e0;
+}
+
+.group-panel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(0,123,255,0.05);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.group-panel-content {
+    position: relative;
+    z-index: 1;
+}
+
+.group-panel h3 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+}
+
+.group-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.group-panel p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.group-notice {
+    background: rgba(255,255,255,0.15);
+    border-left: 4px solid #ffd700;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.group-notice strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #ffd700;
+}
+
+.group-notice ul {
+    margin: 10px 0 0 20px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.group-notice li {
+    margin: 5px 0;
+}
+
+.group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(255,255,255,0.95);
+}
+
+.form-group input {
+    padding: 14px 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    font-size: 15px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.form-group input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.15);
+}
+
+.join-button {
+    padding: 16px 32px;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.join-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    background: #f8f9ff;
+}
+
+.join-button:active {
+    transform: translateY(0);
+}
+
+.success-message {
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid #4CAF50;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+.success-message.show {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
    SEARCH BAR
 ========================================== */
 .search-container {
@@ -478,6 +654,15 @@ footer p {
         font-size: 42px;
     }
     
+    /* Google Group Panel - Tablet */
+    .group-panel {
+        padding: 35px;
+    }
+    
+    .group-panel h3 {
+        font-size: 28px;
+    }
+    
     .search-container {
         max-width: 500px;
         margin-bottom: 40px;
@@ -511,7 +696,6 @@ footer p {
         height: 150px;
     }
     
-    /* Floating Contact - Tablet */
     .floating-contact {
         width: 55px;
         height: 55px;
@@ -629,6 +813,44 @@ footer p {
         font-size: 32px;
         margin-bottom: 30px;
         line-height: 1.2;
+    }
+    
+    /* Google Group Panel - Mobile */
+    .group-panel {
+        padding: 30px 20px;
+    }
+    
+    .group-panel h3 {
+        font-size: 24px;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .group-panel p {
+        font-size: 14px;
+    }
+    
+    .group-notice {
+        padding: 12px 15px;
+    }
+    
+    .group-notice strong {
+        font-size: 14px;
+    }
+    
+    .group-notice ul {
+        font-size: 13px;
+        margin-left: 15px;
+    }
+    
+    .form-group input {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .join-button {
+        padding: 14px 28px;
+        font-size: 15px;
     }
     
     /* Search Bar Mobile */
@@ -757,6 +979,10 @@ footer p {
 @media screen and (max-width: 480px) {
     .explore h2 {
         font-size: 26px;
+    }
+    
+    .group-panel h3 {
+        font-size: 20px;
     }
 
     .game-card {
