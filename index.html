@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trở Thành Người Test Game - Artoon Games</title>
+  <meta name="description" content="Tham gia chương trình test game và trải nghiệm game mới nhất từ Artoon Games">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/test-games.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <!-- Logo -->
+      <div class="logo" onclick="window.location.href='index.html'">
+        <img src="images/logo.png" alt="Artoon Logo" />
+      </div>
+      
+      <!-- Hamburger Toggle (mobile only) -->
+      <button class="menu-toggle" onclick="toggleMenu(event)" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      
+      <!-- Navigation Menu + Social Icons -->
+      <div class="nav-wrapper">
+        <nav class="nav-menu">
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="blog.html">BLOG</a></li>
+            <li><a href="mobile-games.html">MOBILE GAMES</a></li>
+            <li><a href="test-games.html" class="active">TEST GAMES</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+          </ul>
+          <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <img src="images/facebook.png" alt="Facebook" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <img src="images/instagram.png" alt="Instagram" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <img src="images/twitter.png" alt="Twitter" />
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+              <img src="images/youtube.png" alt="YouTube" />
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <!-- MAIN CONTENT -->
+  <main>
+    <section class="tester-section">
+      <!-- Hero -->
+      <div class="tester-hero">
+        <h1>🎮 Trở Thành Người Test Game</h1>
+        <p>Trải nghiệm game mới nhất trước bất kỳ ai khác!<br>Góp ý để giúp chúng tôi phát triển game tốt hơn.</p>
+      </div>
+      
+      <!-- Flow Steps -->
+      <div class="flow-container">
+        <div class="flow-step active" id="step1">
+          <span class="icon">📧</span>
+          <span class="step-title">Nhập Email</span>
+          <span class="step-desc">Email Google Play</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" id="step2">
+          <span class="icon">👥</span>
+          <span class="step-title">Tham Gia Nhóm</span>
+          <span class="step-desc">Click 1 lần</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" id="step3">
+          <span class="icon">🎮</span>
+          <span class="step-title">Tải Game</span>
+          <span class="step-desc">Từ Play Store</span>
+        </div>
+      </div>
+      
+      <!-- Tutorial Box -->
+      <div class="tutorial-box">
+        <h3>💡 Cách tìm email Google Play của bạn:</h3>
+        <div class="tutorial-steps">
+          <div class="tutorial-step">
+            <div class="step-number">1</div>
+            <span>Mở <strong>Google Play Store</strong> trên điện thoại</span>
+          </div>
+          <div class="tutorial-step">
+            <div class="step-number">2</div>
+            <span>Nhấn vào <strong>biểu tượng hồ sơ</strong> (góc trên bên phải)</span>
+          </div>
+          <div class="tutorial-step">
+            <div class="step-number">3</div>
+            <span>Email của bạn hiển thị ở phía trên cùng</span>
+          </div>
+          <div class="tutorial-step">
+            <div class="step-number">4</div>
+            <span>Sử dụng <strong>ĐÚNG EMAIL ĐÓ</strong> ở ô bên dưới ☟</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Form -->
+      <div class="form-container">
+        <form id="testerForm">
+          <div class="form-group">
+            <label class="form-label" for="email">
+              Email Google Play của bạn
+              <span class="tooltip">ℹ️
+                <span class="tooltip-text">
+                  Đây phải là email bạn dùng để đăng nhập Google Play Store. Thường là địa chỉ Gmail của bạn.
+                </span>
+              </span>
+            </label>
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                id="email" 
+                class="form-input"
+                placeholder="email.cua.ban@gmail.com"
+                autocomplete="email"
+                required
+              />
+              <span class="input-icon" id="emailIcon"></span>
+            </div>
+            <div id="validationMessage"></div>
+          </div>
+          
+          <!-- Preview Panel -->
+          <div class="preview-panel" id="previewPanel">
+            <h3>🔄 Điều gì sẽ xảy ra tiếp theo:</h3>
+            <ol>
+              <li>Chúng tôi mời <strong id="previewEmail1"></strong> vào nhóm test game</li>
+              <li>Google Play gửi quyền truy cập game đến <strong id="previewEmail2"></strong></li>
+              <li>Bạn mở Play Store bằng <strong id="previewEmail3"></strong> để tải game</li>
+            </ol>
+            <div class="highlight-box">
+              <span style="font-size: 24px;">⚠️</span>
+              <span>Cả 3 bước đều dùng <strong>CÙNG 1 EMAIL</strong>. Hãy chắc chắn email đúng!</span>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-submit" id="submitBtn" disabled>
+            Tham Gia Chương Trình Test Game
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+  
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Artoon Games. All rights reserved.</p>
+  </footer>
+  
+  <!-- Floating Contact Button -->
+  <a href="contact.html" class="floating-contact" aria-label="Contact Us">
+    <img src="images/contact-icon.png" alt="Contact" />
+  </a>
+  
+  <!-- Success Modal -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <div class="success-icon">🎉</div>
+      <h2>Sắp Xong Rồi!</h2>
+      <p>Một tab mới sẽ mở ra. Hãy nhấn nút <strong>"Tham gia nhóm"</strong> trên Google Groups, sau đó quay lại đây để tải game!</p>
+      <div class="btn-group">
+        <button class="btn btn-primary" id="openGroupBtn">
+          🔗 Mở Trang Google Group
+        </button>
+        <button class="btn btn-secondary" id="alreadyJoinedBtn">
+          ✓ Tôi Đã Tham Gia
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    // ==========================================
+    // Mobile Menu Toggle (Google Translate Compatible)
+    // ==========================================
+    function toggleMenu(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      
+      setTimeout(function() {
+        const navWrapper = document.querySelector('.nav-wrapper');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (!navWrapper || !menuToggle) {
+          console.warn('Menu elements not found');
+          return;
+        }
+        
+        navWrapper.classList.toggle('show');
+        
+        if (navWrapper.classList.contains('show')) {
+          menuToggle.innerHTML = '✕';
+          menuToggle.setAttribute('aria-expanded', 'true');
+        } else {
+          menuToggle.innerHTML = '☰';
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      }, 50);
+    }
+    
+    // ==========================================
+    // Close menu when clicking outside (mobile)
+    // ==========================================
+    document.addEventListener('click', function(event) {
+      if (window.innerWidth <= 768) {
+        setTimeout(function() {
+          const navWrapper = document.querySelector('.nav-wrapper');
+          const menuToggle = document.querySelector('.menu-toggle');
+          const header = document.querySelector('header');
+          
+          if (!navWrapper || !menuToggle || !header) return;
+          
+          if (!header.contains(event.target) && navWrapper.classList.contains('show')) {
+            navWrapper.classList.remove('show');
+            menuToggle.innerHTML = '☰';
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        }, 50);
+      }
+    });
+    
+    // ==========================================
+    // Close menu when clicking link (mobile)
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(event) {
+        if (window.innerWidth <= 768) {
+          const target = event.target.closest('.nav-menu a');
+          
+          if (target) {
+            setTimeout(function() {
+              const navWrapper = document.querySelector('.nav-wrapper');
+              const menuToggle = document.querySelector('.menu-toggle');
+              
+              if (!navWrapper || !menuToggle) return;
+              
+              navWrapper.classList.remove('show');
+              menuToggle.innerHTML = '☰';
+              menuToggle.setAttribute('aria-expanded', 'false');
+            }, 100);
+          }
+        }
+      });
+    });
+    
+    // ==========================================
+    // Reset menu on resize
+    // ==========================================
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        const navWrapper = document.querySelector('.nav-wrapper');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (!navWrapper || !menuToggle) return;
+        
+        if (window.innerWidth > 768) {
+          navWrapper.classList.remove('show');
+          menuToggle.innerHTML = '☰';
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      }, 100);
+    });
+    
+    // ==========================================
+    // TESTER FORM LOGIC
+    // ==========================================
+    const emailInput = document.getElementById('email');
+    const emailIcon = document.getElementById('emailIcon');
+    const validationMessage = document.getElementById('validationMessage');
+    const previewPanel = document.getElementById('previewPanel');
+    const submitBtn = document.getElementById('submitBtn');
+    const successModal = document.getElementById('successModal');
+    
+    let currentEmail = '';
+    
+    // Email validation
+    emailInput.addEventListener('input', function(e) {
+      const email = e.target.value.trim();
+      currentEmail = email;
+      
+      // Clear previous states
+      emailInput.classList.remove('valid', 'warning');
+      emailIcon.textContent = '';
+      validationMessage.innerHTML = '';
+      previewPanel.classList.remove('show');
+      submitBtn.disabled = true;
+      
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        if (email.length > 0) {
+          showValidation('Vui lòng nhập địa chỉ email hợp lệ', 'warning');
+        }
+        return;
+      }
+      
+      // Check email domain
+      const domain = email.split('@')[1];
+      
+      if (domain === 'gmail.com') {
+        emailInput.classList.add('valid');
+        emailIcon.textContent = '✓';
+        showValidation('Hoàn hảo! Gmail hoạt động tuyệt vời với Google Play', 'success');
+        showPreview(email);
+        submitBtn.disabled = false;
+      } else {
+        emailInput.classList.add('warning');
+        emailIcon.textContent = '⚠️';
+        showValidation('Không phải Gmail? Hãy chắc chắn email này được kết nối với tài khoản Google Play của bạn', 'warning');
+        showPreview(email);
+        submitBtn.disabled = false;
+      }
+    });
+    
+    function showValidation(message, type) {
+      validationMessage.className = `validation-message ${type}`;
+      validationMessage.innerHTML = `
+        <span style="font-size: 20px;">${type === 'success' ? '✓' : '⚠️'}</span>
+        <span>${message}</span>
+      `;
+    }
+    
+    function showPreview(email) {
+      document.getElementById('previewEmail1').textContent = email;
+      document.getElementById('previewEmail2').textContent = email;
+      document.getElementById('previewEmail3').textContent = email;
+      previewPanel.classList.add('show');
+      
+      // Activate step 2
+      document.getElementById('step2').classList.add('active');
+    }
+    
+    // Form submission
+    document.getElementById('testerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Save email to localStorage
+      localStorage.setItem('tester_email', currentEmail);
+      localStorage.setItem('tester_timestamp', new Date().toISOString());
+      
+      // Show modal
+      successModal.classList.add('show');
+      
+      // Activate step 3
+      document.getElementById('step3').classList.add('active');
+    });
+    
+    // Open Google Group
+    document.getElementById('openGroupBtn').addEventListener('click', function() {
+      window.open('https://groups.google.com/g/thunghiemgamemoi', '_blank');
+    });
+    
+    // Already joined - redirect to Play Store
+    document.getElementById('alreadyJoinedBtn').addEventListener('click', function() {
+      successModal.classList.remove('show');
+      
+      // TODO: Replace with your actual Google Play testing link
+      // window.location.href = 'https://play.google.com/apps/testing/com.yourgame.package';
+      
+      // Temporary alert
+      alert('🎮 Thay link này bằng link Google Play test của bạn!\n\nVí dụ: https://play.google.com/apps/testing/com.yourgame');
+    });
+    
+    // Close modal on outside click
+    successModal.addEventListener('click', function(e) {
+      if (e.target === successModal) {
+        successModal.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
