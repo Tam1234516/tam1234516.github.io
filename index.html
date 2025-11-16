@@ -54,6 +54,26 @@
     <section class="explore">
       <h2>Explore More Games</h2>
       
+      <!-- Search Bar -->
+      <div class="search-container">
+        <div class="search-wrapper">
+          <input 
+            type="text" 
+            id="game-search" 
+            class="search-input" 
+            placeholder="Search for games..."
+            autocomplete="off"
+          />
+          <button class="search-button" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <!-- Search Results Dropdown -->
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      
       <!-- ==========================================
            GOOGLE GROUP PANEL (NEW)
       ========================================== -->
@@ -103,26 +123,6 @@
             </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Search Bar -->
-      <div class="search-container">
-        <div class="search-wrapper">
-          <input 
-            type="text" 
-            id="game-search" 
-            class="search-input" 
-            placeholder="Search for games..."
-            autocomplete="off"
-          />
-          <button class="search-button" aria-label="Search">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-        <!-- Search Results Dropdown -->
-        <div id="search-results" class="search-results hidden"></div>
       </div>
       
       <!-- Games Container - Ready for SSG (.njk + .json) -->
