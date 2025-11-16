@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Artoon Games - Mobile Game Publisher</title>
   <meta name="description" content="Discover amazing mobile games from Artoon Games">
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/group-panel.css" />
 </head>
 <body>
   <!-- HEADER -->
   <header>
     <div class="header-container">
+      <!-- Logo -->
       <div class="logo" onclick="window.location.href='index.html'">
         <img src="images/logo.png" alt="Artoon Logo" />
       </div>
       
+      <!-- Hamburger Toggle (mobile only) -->
       <button class="menu-toggle" onclick="toggleMenu(event)" aria-label="Toggle menu" aria-expanded="false">☰</button>
       
+      <!-- Navigation Menu + Social Icons -->
       <div class="nav-wrapper">
         <nav class="nav-menu">
           <ul>
@@ -68,61 +70,74 @@
             </svg>
           </button>
         </div>
+        <!-- Search Results Dropdown -->
         <div id="search-results" class="search-results hidden"></div>
       </div>
       
-      <!-- ==========================================
-           GOOGLE GROUP PANEL WITH API
-      ========================================== -->
-      <div class="group-panel">
-        <div class="group-panel-content">
-          <h3>
-            <span class="group-icon">👥</span>
-            Tham Gia Nhóm Test Game
-          </h3>
-          <p>Trở thành người đầu tiên trải nghiệm các game mới! Điền email và chúng tôi sẽ tự động thêm bạn vào nhóm.</p>
-          
-          <div class="group-notice">
-            <strong>⚠️ Lưu ý quan trọng:</strong>
-            <ul>
-              <li>Email phải trùng với email Google Play của bạn</li>
-              <li>Chỉ email đã join group mới có thể test game</li>
-              <li>Sau khi join, chờ 5-10 phút để hệ thống cập nhật</li>
-            </ul>
-          </div>
-          
-          <div class="group-form">
-            <div class="form-group">
-              <label for="user-email">Email của bạn (Gmail) *</label>
-              <input 
-                type="email" 
-                id="user-email" 
-                placeholder="example@gmail.com" 
-                required
-              />
-            </div>
-            
-            <div class="form-group">
-              <label for="user-name">Tên của bạn (không bắt buộc)</label>
-              <input 
-                type="text" 
-                id="user-name" 
-                placeholder="Tên của bạn" 
-              />
-            </div>
-            
-            <button class="join-button" id="joinButton" onclick="joinGroupWithAPI()">
-              🚀 Tham Gia Ngay
-            </button>
-            
-            <div id="success-message" class="success-message"></div>
-            <div id="error-message" class="error-message"></div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Games Container -->
+      <!-- Games Container - Ready for SSG (.njk + .json) -->
       <div id="games-container">
+        
+        <!-- 
+          ============================================
+          TEMPLATE FOR SSG (.njk file):
+          ============================================
+          
+          SEARCH FUNCTIONALITY WITH .NJK:
+          
+          In your .njk template, add this before closing </body>:
+          
+          <script>
+            const gamesData = {{ games | dump | safe }};
+            // Search logic will automatically use this data
+          </script>
+          
+          ============================================
+          GAME CARDS LOOP:
+          ============================================
+          
+          {% for game in games | featured %}
+          <div class="game-card">
+            <div class="game-icon">
+              <img src="{{ game.images.icon }}" alt="{{ game.name }} Icon" />
+            </div>
+            <div class="game-info">
+              <h3>{{ game.name }}</h3>
+              <p>{{ game.description }}</p>
+              <div class="download-buttons">
+                <a href="{{ game.links.testGame }}" target="_blank" rel="noopener noreferrer">
+                  GET IT ON Google Play
+                </a>
+              </div>
+            </div>
+            <div class="game-promo">
+              <img src="{{ game.images.promo }}" alt="{{ game.name }} Promo" />
+            </div>
+          </div>
+          {% endfor %}
+          
+          ============================================
+          DATA FORMAT (games.json):
+          ============================================
+          
+          [
+            {
+              "name": "Your Game Name",
+              "description": "Game description here",
+              "featured": true,
+              "images": {
+                "icon": "images/games/your-game/icon.png",
+                "promo": "images/games/your-game/promo.jpg"
+              },
+              "links": {
+                "testGame": "https://your-test-game-url.com",
+                "googlePlay": "https://play.google.com/...",
+                "appStore": "https://apps.apple.com/..."
+              }
+            }
+          ]
+        -->
+        
+        <!-- Placeholder (remove this when using SSG) -->
         <div class="game-card">
           <div class="game-icon">
             <img src="images/game-icon.png" alt="Game Icon" />
@@ -140,6 +155,7 @@
             <img src="images/game-promo.jpg" alt="Game Promo" />
           </div>
         </div>
+        
       </div>
     </section>
   </main>
@@ -157,25 +173,24 @@
   <!-- JavaScript -->
   <script>
     // ==========================================
-    // CONFIGURATION - THAY URL API Ở ĐÂY
-    // ==========================================
-    const API_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx_6uFNz7dhBuR0hJPri8d5bX4sLVu6SsdJOJaieTSV4oLBjIldkdzM_oGaYqgXgwR4ag/exec';
-    // Ví dụ: 'https://script.google.com/macros/s/AKfycbx.../exec'
-    
-    // ==========================================
-    // Mobile Menu Toggle
+    // Mobile Menu Toggle (Google Translate Compatible)
     // ==========================================
     function toggleMenu(event) {
+      // Prevent default and stop propagation
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
       
+      // Use setTimeout to handle Google Translate delay
       setTimeout(function() {
         const navWrapper = document.querySelector('.nav-wrapper');
         const menuToggle = document.querySelector('.menu-toggle');
         
-        if (!navWrapper || !menuToggle) return;
+        if (!navWrapper || !menuToggle) {
+          console.warn('Menu elements not found');
+          return;
+        }
         
         navWrapper.classList.toggle('show');
         
@@ -189,6 +204,9 @@
       }, 50);
     }
     
+    // ==========================================
+    // Close menu when clicking outside (mobile)
+    // ==========================================
     document.addEventListener('click', function(event) {
       if (window.innerWidth <= 768) {
         setTimeout(function() {
@@ -198,6 +216,7 @@
           
           if (!navWrapper || !menuToggle || !header) return;
           
+          // Check if clicked outside header
           if (!header.contains(event.target) && navWrapper.classList.contains('show')) {
             navWrapper.classList.remove('show');
             menuToggle.innerHTML = '☰';
@@ -207,7 +226,11 @@
       }
     });
     
+    // ==========================================
+    // Close menu when clicking link (mobile)
+    // ==========================================
     document.addEventListener('DOMContentLoaded', function() {
+      // Use event delegation for better compatibility
       document.body.addEventListener('click', function(event) {
         if (window.innerWidth <= 768) {
           const target = event.target.closest('.nav-menu a');
@@ -228,6 +251,9 @@
       });
     });
     
+    // ==========================================
+    // Reset menu on resize
+    // ==========================================
     let resizeTimer;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
@@ -245,8 +271,12 @@
       }, 100);
     });
     
+    // ==========================================
+    // Handle Google Translate mutation
+    // ==========================================
     if (typeof MutationObserver !== 'undefined') {
       const observer = new MutationObserver(function(mutations) {
+        // Re-attach event listeners if DOM changes
         const menuToggle = document.querySelector('.menu-toggle');
         if (menuToggle && !menuToggle.hasAttribute('data-listener-attached')) {
           menuToggle.setAttribute('data-listener-attached', 'true');
@@ -260,134 +290,24 @@
     }
     
     // ==========================================
-    // JOIN GOOGLE GROUP WITH API
-    // ==========================================
-    async function joinGroupWithAPI() {
-      const emailInput = document.getElementById('user-email');
-      const nameInput = document.getElementById('user-name');
-      const joinButton = document.getElementById('joinButton');
-      const successMessage = document.getElementById('success-message');
-      const errorMessage = document.getElementById('error-message');
-      
-      const email = emailInput.value.trim();
-      const name = nameInput.value.trim();
-      
-      // Hide previous messages
-      successMessage.classList.remove('show');
-      errorMessage.classList.remove('show');
-      successMessage.textContent = '';
-      errorMessage.textContent = '';
-      
-      // Validate email
-      if (!email) {
-        showError('⚠️ Vui lòng nhập email của bạn!');
-        emailInput.focus();
-        return;
-      }
-      
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        showError('⚠️ Email không hợp lệ! Vui lòng nhập đúng định dạng.');
-        emailInput.focus();
-        return;
-      }
-      
-      // Check if Gmail
-      if (!email.toLowerCase().endsWith('@gmail.com')) {
-        const confirmNonGmail = confirm(
-          '⚠️ Khuyến nghị sử dụng Gmail để dễ join group và test game.\n\n' +
-          'Email không phải Gmail. Bạn có muốn tiếp tục?'
-        );
-        if (!confirmNonGmail) return;
-      }
-      
-      // Check API configured
-      if (API_ENDPOINT === 'https://script.google.com/macros/s/AKfycby-Z67c-mo9A9uRXa4GcYRvwzlucBphmUoBviwNfSlVLqjWvGnvK8MuohNS5wGn2FbVBQ/exec') {
-        showError('⚠️ Chưa cấu hình API! Xem hướng dẫn setup bên dưới.');
-        console.error('Cần update API_ENDPOINT với Google Apps Script URL của bạn');
-        return;
-      }
-      
-      // Show loading
-      joinButton.disabled = true;
-      joinButton.classList.add('loading');
-      joinButton.textContent = 'Đang xử lý...';
-      
-      try {
-        const response = await fetch(API_ENDPOINT, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            name: name
-          })
-        });
-        
-        // With no-cors, assume success if no error
-        showSuccess(`✅ Thành công! Email ${email} đã được thêm vào nhóm. Bạn sẽ nhận email xác nhận trong vài phút.`);
-        
-        // Clear form
-        emailInput.value = '';
-        nameInput.value = '';
-        
-        // Open group page
-        setTimeout(() => {
-          window.open('https://groups.google.com/g/thunghiemgamemoi', '_blank');
-        }, 1500);
-        
-      } catch (error) {
-        console.error('Error:', error);
-        showError('❌ Có lỗi xảy ra. Vui lòng thử lại hoặc tham gia trực tiếp qua link Google Groups.');
-      } finally {
-        joinButton.disabled = false;
-        joinButton.classList.remove('loading');
-        joinButton.textContent = '🚀 Tham Gia Ngay';
-      }
-    }
-    
-    function showSuccess(message) {
-      const successMessage = document.getElementById('success-message');
-      successMessage.textContent = message;
-      successMessage.classList.add('show');
-      
-      setTimeout(() => {
-        successMessage.classList.remove('show');
-      }, 10000);
-    }
-    
-    function showError(message) {
-      const errorMessage = document.getElementById('error-message');
-      errorMessage.textContent = message;
-      errorMessage.classList.add('show');
-      
-      setTimeout(() => {
-        errorMessage.classList.remove('show');
-      }, 8000);
-    }
-    
-    // Enter key to submit
-    document.getElementById('user-email').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        joinGroupWithAPI();
-      }
-    });
-    
-    document.getElementById('user-name').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        joinGroupWithAPI();
-      }
-    });
-    
-    // ==========================================
     // GAME SEARCH FUNCTIONALITY
     // ==========================================
-    const gamesData = [];
     
+    // Games data - Will be populated from games.json via SSG
+    // Example format:
+    // const gamesData = [
+    //   {
+    //     "name": "Game Name",
+    //     "description": "Game description",
+    //     "category": "Category",
+    //     "images": { "icon": "path/to/icon.png" },
+    //     "links": { "testGame": "https://game-url.com" }
+    //   }
+    // ];
+    
+    const gamesData = []; // Empty - Add your games here or load from JSON
+    
+    // Search input handler
     const searchInput = document.getElementById('game-search');
     const searchResults = document.getElementById('search-results');
     
@@ -401,18 +321,21 @@
           return;
         }
         
+        // Check if games data exists
         if (gamesData.length === 0) {
           searchResults.innerHTML = '<div class="search-no-results">No games available yet. Add games in games.json</div>';
           searchResults.classList.remove('hidden');
           return;
         }
         
+        // Filter games
         const filtered = gamesData.filter(game => 
           game.name.toLowerCase().includes(query) ||
           game.description.toLowerCase().includes(query) ||
           game.category.toLowerCase().includes(query)
         );
         
+        // Display results
         if (filtered.length > 0) {
           searchResults.innerHTML = filtered.map(game => `
             <a href="${game.links.testGame}" class="search-result-item">
@@ -430,12 +353,14 @@
         }
       });
       
+      // Close search results when clicking outside
       document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
           searchResults.classList.add('hidden');
         }
       });
       
+      // Clear search on escape
       searchInput.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           searchInput.value = '';
