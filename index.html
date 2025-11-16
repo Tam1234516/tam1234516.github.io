@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Artoon Games - Mobile Game Publisher</title>
   <meta name="description" content="Discover amazing mobile games from Artoon Games">
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/group-panel.css" />
 </head>
 <body>
   <!-- HEADER -->
   <header>
     <div class="header-container">
-      <!-- Logo -->
       <div class="logo" onclick="window.location.href='index.html'">
         <img src="images/logo.png" alt="Artoon Logo" />
       </div>
       
-      <!-- Hamburger Toggle (mobile only) -->
       <button class="menu-toggle" onclick="toggleMenu(event)" aria-label="Toggle menu" aria-expanded="false">☰</button>
       
-      <!-- Navigation Menu + Social Icons -->
       <div class="nav-wrapper">
         <nav class="nav-menu">
           <ul>
@@ -70,25 +68,24 @@
             </svg>
           </button>
         </div>
-        <!-- Search Results Dropdown -->
         <div id="search-results" class="search-results hidden"></div>
       </div>
       
       <!-- ==========================================
-           GOOGLE GROUP PANEL (NEW)
+           GOOGLE GROUP PANEL WITH API
       ========================================== -->
       <div class="group-panel">
         <div class="group-panel-content">
           <h3>
             <span class="group-icon">👥</span>
-            Join Our Test Games Community
+            Tham Gia Nhóm Test Game
           </h3>
-          <p>Trở thành người đầu tiên trải nghiệm các game mới! Tham gia Google Group để nhận quyền test game ngay.</p>
+          <p>Trở thành người đầu tiên trải nghiệm các game mới! Điền email và chúng tôi sẽ tự động thêm bạn vào nhóm.</p>
           
           <div class="group-notice">
             <strong>⚠️ Lưu ý quan trọng:</strong>
             <ul>
-              <li>Email bạn điền phải trùng với email Google Play của bạn</li>
+              <li>Email phải trùng với email Google Play của bạn</li>
               <li>Chỉ email đã join group mới có thể test game</li>
               <li>Sau khi join, chờ 5-10 phút để hệ thống cập nhật</li>
             </ul>
@@ -96,7 +93,7 @@
           
           <div class="group-form">
             <div class="form-group">
-              <label for="user-email">Email của bạn (Gmail):</label>
+              <label for="user-email">Email của bạn (Gmail) *</label>
               <input 
                 type="email" 
                 id="user-email" 
@@ -106,7 +103,7 @@
             </div>
             
             <div class="form-group">
-              <label for="user-name">Tên của bạn (không bắt buộc):</label>
+              <label for="user-name">Tên của bạn (không bắt buộc)</label>
               <input 
                 type="text" 
                 id="user-name" 
@@ -114,21 +111,18 @@
               />
             </div>
             
-            <button class="join-button" onclick="joinGroup()">
-              🚀 Tham Gia Google Group
+            <button class="join-button" id="joinButton" onclick="joinGroupWithAPI()">
+              🚀 Tham Gia Ngay
             </button>
             
-            <div id="success-message" class="success-message">
-              ✅ Đã mở trang Google Group! Vui lòng nhấn "Ask to join" để hoàn tất.
-            </div>
+            <div id="success-message" class="success-message"></div>
+            <div id="error-message" class="error-message"></div>
           </div>
         </div>
       </div>
       
-      <!-- Games Container - Ready for SSG (.njk + .json) -->
+      <!-- Games Container -->
       <div id="games-container">
-        
-        <!-- Placeholder (remove this when using SSG) -->
         <div class="game-card">
           <div class="game-icon">
             <img src="images/game-icon.png" alt="Game Icon" />
@@ -146,7 +140,6 @@
             <img src="images/game-promo.jpg" alt="Game Promo" />
           </div>
         </div>
-        
       </div>
     </section>
   </main>
@@ -164,7 +157,13 @@
   <!-- JavaScript -->
   <script>
     // ==========================================
-    // Mobile Menu Toggle (Google Translate Compatible)
+    // CONFIGURATION - THAY URL API Ở ĐÂY
+    // ==========================================
+    const API_ENDPOINT = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    // Ví dụ: 'https://script.google.com/macros/s/AKfycbx.../exec'
+    
+    // ==========================================
+    // Mobile Menu Toggle
     // ==========================================
     function toggleMenu(event) {
       if (event) {
@@ -176,10 +175,7 @@
         const navWrapper = document.querySelector('.nav-wrapper');
         const menuToggle = document.querySelector('.menu-toggle');
         
-        if (!navWrapper || !menuToggle) {
-          console.warn('Menu elements not found');
-          return;
-        }
+        if (!navWrapper || !menuToggle) return;
         
         navWrapper.classList.toggle('show');
         
@@ -193,9 +189,6 @@
       }, 50);
     }
     
-    // ==========================================
-    // Close menu when clicking outside (mobile)
-    // ==========================================
     document.addEventListener('click', function(event) {
       if (window.innerWidth <= 768) {
         setTimeout(function() {
@@ -214,9 +207,6 @@
       }
     });
     
-    // ==========================================
-    // Close menu when clicking link (mobile)
-    // ==========================================
     document.addEventListener('DOMContentLoaded', function() {
       document.body.addEventListener('click', function(event) {
         if (window.innerWidth <= 768) {
@@ -238,9 +228,6 @@
       });
     });
     
-    // ==========================================
-    // Reset menu on resize
-    // ==========================================
     let resizeTimer;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
@@ -258,9 +245,6 @@
       }, 100);
     });
     
-    // ==========================================
-    // Handle Google Translate mutation
-    // ==========================================
     if (typeof MutationObserver !== 'undefined') {
       const observer = new MutationObserver(function(mutations) {
         const menuToggle = document.querySelector('.menu-toggle');
@@ -276,68 +260,126 @@
     }
     
     // ==========================================
-    // JOIN GOOGLE GROUP FUNCTION (NEW)
+    // JOIN GOOGLE GROUP WITH API
     // ==========================================
-    function joinGroup() {
+    async function joinGroupWithAPI() {
       const emailInput = document.getElementById('user-email');
       const nameInput = document.getElementById('user-name');
+      const joinButton = document.getElementById('joinButton');
       const successMessage = document.getElementById('success-message');
+      const errorMessage = document.getElementById('error-message');
       
       const email = emailInput.value.trim();
       const name = nameInput.value.trim();
       
+      // Hide previous messages
+      successMessage.classList.remove('show');
+      errorMessage.classList.remove('show');
+      successMessage.textContent = '';
+      errorMessage.textContent = '';
+      
       // Validate email
       if (!email) {
-        alert('⚠️ Vui lòng nhập email của bạn!');
+        showError('⚠️ Vui lòng nhập email của bạn!');
         emailInput.focus();
         return;
       }
       
-      // Basic email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        alert('⚠️ Email không hợp lệ! Vui lòng nhập đúng định dạng email.');
+        showError('⚠️ Email không hợp lệ! Vui lòng nhập đúng định dạng.');
         emailInput.focus();
         return;
       }
       
-      // Check if it's a Gmail address (recommended)
+      // Check if Gmail
       if (!email.toLowerCase().endsWith('@gmail.com')) {
         const confirmNonGmail = confirm(
-          '⚠️ Bạn nên sử dụng Gmail để dễ dàng join group và test game.\n\n' +
-          'Email của bạn không phải Gmail. Bạn có chắc muốn tiếp tục?'
+          '⚠️ Khuyến nghị sử dụng Gmail để dễ join group và test game.\n\n' +
+          'Email không phải Gmail. Bạn có muốn tiếp tục?'
         );
-        if (!confirmNonGmail) {
-          return;
-        }
+        if (!confirmNonGmail) return;
       }
       
-      // Show success message
+      // Check API configured
+      if (API_ENDPOINT === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        showError('⚠️ Chưa cấu hình API! Xem hướng dẫn setup bên dưới.');
+        console.error('Cần update API_ENDPOINT với Google Apps Script URL của bạn');
+        return;
+      }
+      
+      // Show loading
+      joinButton.disabled = true;
+      joinButton.classList.add('loading');
+      joinButton.textContent = 'Đang xử lý...';
+      
+      try {
+        const response = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            name: name
+          })
+        });
+        
+        // With no-cors, assume success if no error
+        showSuccess(`✅ Thành công! Email ${email} đã được thêm vào nhóm. Bạn sẽ nhận email xác nhận trong vài phút.`);
+        
+        // Clear form
+        emailInput.value = '';
+        nameInput.value = '';
+        
+        // Open group page
+        setTimeout(() => {
+          window.open('https://groups.google.com/g/thunghiemgamemoi', '_blank');
+        }, 1500);
+        
+      } catch (error) {
+        console.error('Error:', error);
+        showError('❌ Có lỗi xảy ra. Vui lòng thử lại hoặc tham gia trực tiếp qua link Google Groups.');
+      } finally {
+        joinButton.disabled = false;
+        joinButton.classList.remove('loading');
+        joinButton.textContent = '🚀 Tham Gia Ngay';
+      }
+    }
+    
+    function showSuccess(message) {
+      const successMessage = document.getElementById('success-message');
+      successMessage.textContent = message;
       successMessage.classList.add('show');
       
-      // Open Google Group in new tab
-      const groupUrl = 'https://groups.google.com/g/thunghiemgamemoi';
-      window.open(groupUrl, '_blank');
-      
-      // Hide success message after 10 seconds
       setTimeout(() => {
         successMessage.classList.remove('show');
       }, 10000);
-      
-      // Optional: Log for analytics
-      console.log('User joining group:', { email, name });
     }
     
-    // Allow Enter key to submit
+    function showError(message) {
+      const errorMessage = document.getElementById('error-message');
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      
+      setTimeout(() => {
+        errorMessage.classList.remove('show');
+      }, 8000);
+    }
+    
+    // Enter key to submit
     document.getElementById('user-email').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
-        joinGroup();
+        e.preventDefault();
+        joinGroupWithAPI();
       }
     });
     
     document.getElementById('user-name').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
-        joinGroup();
+        e.preventDefault();
+        joinGroupWithAPI();
       }
     });
     
