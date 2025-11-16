@@ -54,6 +54,57 @@
     <section class="explore">
       <h2>Explore More Games</h2>
       
+      <!-- ==========================================
+           GOOGLE GROUP PANEL (NEW)
+      ========================================== -->
+      <div class="group-panel">
+        <div class="group-panel-content">
+          <h3>
+            <span class="group-icon">👥</span>
+            Join Our Test Games Community
+          </h3>
+          <p>Trở thành người đầu tiên trải nghiệm các game mới! Tham gia Google Group để nhận quyền test game ngay.</p>
+          
+          <div class="group-notice">
+            <strong>⚠️ Lưu ý quan trọng:</strong>
+            <ul>
+              <li>Email bạn điền phải trùng với email Google Play của bạn</li>
+              <li>Chỉ email đã join group mới có thể test game</li>
+              <li>Sau khi join, chờ 5-10 phút để hệ thống cập nhật</li>
+            </ul>
+          </div>
+          
+          <div class="group-form">
+            <div class="form-group">
+              <label for="user-email">Email của bạn (Gmail):</label>
+              <input 
+                type="email" 
+                id="user-email" 
+                placeholder="example@gmail.com" 
+                required
+              />
+            </div>
+            
+            <div class="form-group">
+              <label for="user-name">Tên của bạn (không bắt buộc):</label>
+              <input 
+                type="text" 
+                id="user-name" 
+                placeholder="Tên của bạn" 
+              />
+            </div>
+            
+            <button class="join-button" onclick="joinGroup()">
+              🚀 Tham Gia Google Group
+            </button>
+            
+            <div id="success-message" class="success-message">
+              ✅ Đã mở trang Google Group! Vui lòng nhấn "Ask to join" để hoàn tất.
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <!-- Search Bar -->
       <div class="search-container">
         <div class="search-wrapper">
@@ -76,66 +127,6 @@
       
       <!-- Games Container - Ready for SSG (.njk + .json) -->
       <div id="games-container">
-        
-        <!-- 
-          ============================================
-          TEMPLATE FOR SSG (.njk file):
-          ============================================
-          
-          SEARCH FUNCTIONALITY WITH .NJK:
-          
-          In your .njk template, add this before closing </body>:
-          
-          <script>
-            const gamesData = {{ games | dump | safe }};
-            // Search logic will automatically use this data
-          </script>
-          
-          ============================================
-          GAME CARDS LOOP:
-          ============================================
-          
-          {% for game in games | featured %}
-          <div class="game-card">
-            <div class="game-icon">
-              <img src="{{ game.images.icon }}" alt="{{ game.name }} Icon" />
-            </div>
-            <div class="game-info">
-              <h3>{{ game.name }}</h3>
-              <p>{{ game.description }}</p>
-              <div class="download-buttons">
-                <a href="{{ game.links.testGame }}" target="_blank" rel="noopener noreferrer">
-                  GET IT ON Google Play
-                </a>
-              </div>
-            </div>
-            <div class="game-promo">
-              <img src="{{ game.images.promo }}" alt="{{ game.name }} Promo" />
-            </div>
-          </div>
-          {% endfor %}
-          
-          ============================================
-          DATA FORMAT (games.json):
-          ============================================
-          
-          [
-            {
-              "name": "Your Game Name",
-              "description": "Game description here",
-              "featured": true,
-              "images": {
-                "icon": "images/games/your-game/icon.png",
-                "promo": "images/games/your-game/promo.jpg"
-              },
-              "links": {
-                "testGame": "https://your-test-game-url.com",
-                "googlePlay": "https://play.google.com/...",
-                "appStore": "https://apps.apple.com/..."
-              }
-            }
-          ]
-        -->
         
         <!-- Placeholder (remove this when using SSG) -->
         <div class="game-card">
@@ -176,13 +167,11 @@
     // Mobile Menu Toggle (Google Translate Compatible)
     // ==========================================
     function toggleMenu(event) {
-      // Prevent default and stop propagation
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
       
-      // Use setTimeout to handle Google Translate delay
       setTimeout(function() {
         const navWrapper = document.querySelector('.nav-wrapper');
         const menuToggle = document.querySelector('.menu-toggle');
@@ -216,7 +205,6 @@
           
           if (!navWrapper || !menuToggle || !header) return;
           
-          // Check if clicked outside header
           if (!header.contains(event.target) && navWrapper.classList.contains('show')) {
             navWrapper.classList.remove('show');
             menuToggle.innerHTML = '☰';
@@ -230,7 +218,6 @@
     // Close menu when clicking link (mobile)
     // ==========================================
     document.addEventListener('DOMContentLoaded', function() {
-      // Use event delegation for better compatibility
       document.body.addEventListener('click', function(event) {
         if (window.innerWidth <= 768) {
           const target = event.target.closest('.nav-menu a');
@@ -276,7 +263,6 @@
     // ==========================================
     if (typeof MutationObserver !== 'undefined') {
       const observer = new MutationObserver(function(mutations) {
-        // Re-attach event listeners if DOM changes
         const menuToggle = document.querySelector('.menu-toggle');
         if (menuToggle && !menuToggle.hasAttribute('data-listener-attached')) {
           menuToggle.setAttribute('data-listener-attached', 'true');
@@ -290,24 +276,76 @@
     }
     
     // ==========================================
+    // JOIN GOOGLE GROUP FUNCTION (NEW)
+    // ==========================================
+    function joinGroup() {
+      const emailInput = document.getElementById('user-email');
+      const nameInput = document.getElementById('user-name');
+      const successMessage = document.getElementById('success-message');
+      
+      const email = emailInput.value.trim();
+      const name = nameInput.value.trim();
+      
+      // Validate email
+      if (!email) {
+        alert('⚠️ Vui lòng nhập email của bạn!');
+        emailInput.focus();
+        return;
+      }
+      
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('⚠️ Email không hợp lệ! Vui lòng nhập đúng định dạng email.');
+        emailInput.focus();
+        return;
+      }
+      
+      // Check if it's a Gmail address (recommended)
+      if (!email.toLowerCase().endsWith('@gmail.com')) {
+        const confirmNonGmail = confirm(
+          '⚠️ Bạn nên sử dụng Gmail để dễ dàng join group và test game.\n\n' +
+          'Email của bạn không phải Gmail. Bạn có chắc muốn tiếp tục?'
+        );
+        if (!confirmNonGmail) {
+          return;
+        }
+      }
+      
+      // Show success message
+      successMessage.classList.add('show');
+      
+      // Open Google Group in new tab
+      const groupUrl = 'https://groups.google.com/g/thunghiemgamemoi';
+      window.open(groupUrl, '_blank');
+      
+      // Hide success message after 10 seconds
+      setTimeout(() => {
+        successMessage.classList.remove('show');
+      }, 10000);
+      
+      // Optional: Log for analytics
+      console.log('User joining group:', { email, name });
+    }
+    
+    // Allow Enter key to submit
+    document.getElementById('user-email').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        joinGroup();
+      }
+    });
+    
+    document.getElementById('user-name').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        joinGroup();
+      }
+    });
+    
+    // ==========================================
     // GAME SEARCH FUNCTIONALITY
     // ==========================================
+    const gamesData = [];
     
-    // Games data - Will be populated from games.json via SSG
-    // Example format:
-    // const gamesData = [
-    //   {
-    //     "name": "Game Name",
-    //     "description": "Game description",
-    //     "category": "Category",
-    //     "images": { "icon": "path/to/icon.png" },
-    //     "links": { "testGame": "https://game-url.com" }
-    //   }
-    // ];
-    
-    const gamesData = []; // Empty - Add your games here or load from JSON
-    
-    // Search input handler
     const searchInput = document.getElementById('game-search');
     const searchResults = document.getElementById('search-results');
     
@@ -321,21 +359,18 @@
           return;
         }
         
-        // Check if games data exists
         if (gamesData.length === 0) {
           searchResults.innerHTML = '<div class="search-no-results">No games available yet. Add games in games.json</div>';
           searchResults.classList.remove('hidden');
           return;
         }
         
-        // Filter games
         const filtered = gamesData.filter(game => 
           game.name.toLowerCase().includes(query) ||
           game.description.toLowerCase().includes(query) ||
           game.category.toLowerCase().includes(query)
         );
         
-        // Display results
         if (filtered.length > 0) {
           searchResults.innerHTML = filtered.map(game => `
             <a href="${game.links.testGame}" class="search-result-item">
@@ -353,14 +388,12 @@
         }
       });
       
-      // Close search results when clicking outside
       document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
           searchResults.classList.add('hidden');
         }
       });
       
-      // Clear search on escape
       searchInput.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           searchInput.value = '';
