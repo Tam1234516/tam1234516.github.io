@@ -40,7 +40,7 @@ a {
 }
 
 /* ==========================================
-   HEADER - DESKTOP
+   HEADER
 ========================================== */
 header {
     background: var(--bg-white);
@@ -59,7 +59,6 @@ header {
     align-items: center;
 }
 
-/* Logo */
 .logo {
     display: flex;
     align-items: center;
@@ -71,7 +70,6 @@ header {
     width: auto;
 }
 
-/* Hamburger Menu Button (hidden on desktop) */
 .menu-toggle {
     display: none;
     background: none;
@@ -83,12 +81,10 @@ header {
     line-height: 1;
 }
 
-/* Navigation Wrapper */
 .nav-wrapper {
     display: block;
 }
 
-/* Navigation Menu */
 .nav-menu {
     display: flex;
     align-items: center;
@@ -119,7 +115,6 @@ header {
     border-bottom-color: var(--primary-blue);
 }
 
-/* Social Icons */
 .social-icons {
     display: flex;
     gap: 15px;
@@ -164,7 +159,6 @@ main {
     padding: 60px;
 }
 
-/* Explore Section */
 .explore {
     text-align: center;
 }
@@ -232,7 +226,6 @@ main {
     color: var(--primary-blue);
 }
 
-/* Search Results Dropdown */
 .search-results {
     position: absolute;
     top: calc(100% + 10px);
@@ -301,10 +294,199 @@ main {
 }
 
 /* ==========================================
+   GOOGLE GROUP PANEL
+========================================== */
+.group-panel {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: var(--shadow-md);
+    color: var(--text-dark);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #e0e0e0;
+}
+
+.group-panel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(0,123,255,0.05);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.group-panel-content {
+    position: relative;
+    z-index: 1;
+}
+
+.group-panel h3 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    color: var(--text-dark);
+}
+
+.group-icon {
+    width: 40px;
+    height: 40px;
+    background: #007bff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.group-panel p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+.group-notice {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.group-notice strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #856404;
+}
+
+.group-notice ul {
+    margin: 10px 0 0 20px;
+    font-size: 14px;
+    color: #856404;
+}
+
+.group-notice li {
+    margin: 5px 0;
+}
+
+.group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+.form-group input {
+    padding: 14px 18px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    background: var(--bg-white);
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.form-group input::placeholder {
+    color: var(--text-gray);
+    opacity: 0.6;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+.join-button {
+    padding: 16px 32px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.join-button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,123,255,0.4);
+}
+
+.join-button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.success-message,
+.error-message {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+.success-message {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+}
+
+.error-message {
+    background: #f8d7da;
+    border: 2px solid #dc3545;
+    color: #721c24;
+    white-space: pre-line;
+}
+
+.success-message.show,
+.error-message.show {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
    GAME CARD
 ========================================== */
-
-/* Game Card - Desktop Layout (3 columns) */
 .game-card {
     background: var(--bg-white);
     border-radius: var(--border-radius);
@@ -318,7 +500,6 @@ main {
     margin-bottom: 30px;
 }
 
-/* Game Icon */
 .game-icon {
     width: 100px;
     height: 100px;
@@ -333,7 +514,6 @@ main {
     object-fit: cover;
 }
 
-/* Game Info - Middle Column */
 .game-info {
     display: flex;
     flex-direction: column;
@@ -354,7 +534,6 @@ main {
     line-height: 1.5;
 }
 
-/* Download Buttons */
 .download-buttons {
     margin-top: 10px;
 }
@@ -376,7 +555,6 @@ main {
     box-shadow: 0 4px 12px rgba(0,123,255,0.3);
 }
 
-/* Game Promo Image - Right Column */
 .game-promo {
     width: 300px;
     height: 180px;
@@ -440,7 +618,6 @@ footer p {
     filter: brightness(0) invert(1);
 }
 
-/* Pulse animation */
 @keyframes pulse {
     0%, 100% {
         box-shadow: 0 4px 20px rgba(0,164,239,0.4);
@@ -491,6 +668,14 @@ footer p {
     .search-button {
         padding: 14px 20px;
     }
+    
+    .group-panel {
+        padding: 35px;
+    }
+    
+    .group-panel h3 {
+        font-size: 28px;
+    }
 
     .game-card {
         padding: 35px;
@@ -511,7 +696,6 @@ footer p {
         height: 150px;
     }
     
-    /* Floating Contact - Tablet */
     .floating-contact {
         width: 55px;
         height: 55px;
@@ -529,7 +713,6 @@ footer p {
    MOBILE (< 768px)
 ========================================== */
 @media screen and (max-width: 768px) {
-    /* Header Mobile */
     .header-container {
         padding: 15px 20px;
         flex-wrap: wrap;
@@ -544,13 +727,11 @@ footer p {
         height: 40px;
     }
 
-    /* Show Hamburger Button */
     .menu-toggle {
         display: block;
         order: 2;
     }
 
-    /* Navigation Wrapper - Hidden by default on mobile */
     .nav-wrapper {
         order: 3;
         width: 100%;
@@ -561,7 +742,6 @@ footer p {
         margin-top: 0;
     }
 
-    /* Show navigation when toggled */
     .nav-wrapper.show {
         max-height: 600px;
         opacity: 1;
@@ -570,7 +750,6 @@ footer p {
         border-top: 1px solid #eee;
     }
 
-    /* Navigation Menu - Vertical on Mobile */
     .nav-menu {
         flex-direction: column;
         gap: 0;
@@ -606,7 +785,6 @@ footer p {
         border-left: 3px solid var(--primary-blue);
     }
 
-    /* Social Icons - Centered on Mobile */
     .social-icons {
         justify-content: center;
         padding: 15px 0;
@@ -620,7 +798,6 @@ footer p {
         height: 30px;
     }
 
-    /* Main Content Mobile */
     main {
         padding: 30px 20px;
     }
@@ -631,7 +808,6 @@ footer p {
         line-height: 1.2;
     }
     
-    /* Search Bar Mobile */
     .search-container {
         max-width: 100%;
         margin: 0 0 30px;
@@ -673,8 +849,44 @@ footer p {
     .search-result-category {
         font-size: 12px;
     }
+    
+    .group-panel {
+        padding: 30px 20px;
+    }
+    
+    .group-panel h3 {
+        font-size: 24px;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .group-panel p {
+        font-size: 14px;
+    }
+    
+    .group-notice {
+        padding: 12px 15px;
+    }
+    
+    .group-notice strong {
+        font-size: 14px;
+    }
+    
+    .group-notice ul {
+        font-size: 13px;
+        margin-left: 15px;
+    }
+    
+    .form-group input {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .join-button {
+        padding: 14px 28px;
+        font-size: 15px;
+    }
 
-    /* Game Card - VERTICAL LAYOUT (1 column, 3 rows) */
     .game-card {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
@@ -683,14 +895,12 @@ footer p {
         text-align: center;
     }
 
-    /* Row 1: Game Icon */
     .game-icon {
         justify-self: center;
         width: 90px;
         height: 90px;
     }
 
-    /* Row 2: Game Info */
     .game-info {
         align-items: center;
         text-align: center;
@@ -719,7 +929,6 @@ footer p {
         font-size: 15px;
     }
 
-    /* Row 3: Game Promo - Full Width */
     .game-promo {
         width: 100%;
         max-width: 100%;
@@ -727,7 +936,6 @@ footer p {
         justify-self: center;
     }
 
-    /* Footer Mobile */
     footer {
         margin-top: 50px;
         padding: 25px 20px;
@@ -737,7 +945,6 @@ footer p {
         font-size: 13px;
     }
     
-    /* Floating Contact - Mobile */
     .floating-contact {
         width: 50px;
         height: 50px;
@@ -757,6 +964,10 @@ footer p {
 @media screen and (max-width: 480px) {
     .explore h2 {
         font-size: 26px;
+    }
+    
+    .group-panel h3 {
+        font-size: 20px;
     }
 
     .game-card {
