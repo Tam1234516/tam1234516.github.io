@@ -996,3 +996,498 @@ footer p {
         height: 170px;
     }
 }
+/* Copy toàn bộ CSS hiện tại của bạn ở trên, sau đó thêm phần này vào cuối file */
+
+/* ==========================================
+   ABOUT US PAGE STYLES
+========================================== */
+
+/* Hero Section */
+.about-hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 60px;
+}
+
+.about-hero h1 {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 15px;
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+/* About Section Styles */
+.about-section {
+  margin-bottom: 80px;
+}
+
+.about-section h2 {
+  font-size: 40px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--text-dark);
+}
+
+.section-intro {
+  text-align: center;
+  font-size: 18px;
+  color: var(--text-gray);
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Story Section */
+.story-section {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
+
+/* Mission & Vision */
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.mission-card {
+  background: var(--bg-white);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.mission-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.card-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.mission-card h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+}
+
+.mission-card p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-gray);
+}
+
+/* Values Section */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.value-card {
+  background: var(--bg-white);
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.value-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.value-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.value-card p {
+  font-size: 14px;
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
+/* Stats Section */
+.stats-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 40px;
+  border-radius: 20px;
+  color: white;
+}
+
+.stats-section h2 {
+  color: white;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.stat-number.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stat-label {
+  font-size: 16px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Team Section */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.team-card {
+  background: var(--bg-white);
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.team-avatar {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.team-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--text-dark);
+}
+
+.team-role {
+  font-size: 14px;
+  color: var(--primary-blue);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.team-bio {
+  font-size: 13px;
+  color: var(--text-gray);
+  line-height: 1.5;
+}
+
+/* CTA Section */
+.cta-section {
+  background: var(--bg-white);
+  padding: 60px 40px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.cta-content h2 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+}
+
+.cta-content p {
+  font-size: 18px;
+  color: var(--text-gray);
+  margin-bottom: 30px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cta-button.primary {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.cta-button.primary:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,123,255,0.4);
+}
+
+.cta-button.secondary {
+  background: var(--bg-white);
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.cta-button.secondary:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   ABOUT PAGE - TABLET RESPONSIVE
+========================================== */
+@media screen and (max-width: 1024px) {
+  .about-hero h1 {
+    font-size: 40px;
+  }
+  
+  .hero-subtitle {
+    font-size: 18px;
+  }
+  
+  .about-section h2 {
+    font-size: 36px;
+  }
+  
+  .mission-vision-grid {
+    gap: 30px;
+  }
+  
+  .mission-card {
+    padding: 30px;
+  }
+  
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+/* ==========================================
+   ABOUT PAGE - MOBILE RESPONSIVE
+========================================== */
+@media screen and (max-width: 768px) {
+  .about-hero {
+    padding: 40px 20px;
+    border-radius: 16px;
+  }
+  
+  .about-hero h1 {
+    font-size: 32px;
+  }
+  
+  .hero-subtitle {
+    font-size: 16px;
+  }
+  
+  .about-section {
+    margin-bottom: 60px;
+  }
+  
+  .about-section h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  .section-intro {
+    font-size: 16px;
+  }
+  
+  .section-content p {
+    font-size: 16px;
+  }
+  
+  .mission-vision-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .mission-card {
+    padding: 30px 20px;
+  }
+  
+  .mission-card h3 {
+    font-size: 24px;
+  }
+  
+  .mission-card p {
+    font-size: 15px;
+  }
+  
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .stats-section {
+    padding: 40px 20px;
+    border-radius: 16px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .stat-number {
+    font-size: 36px;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .cta-section {
+    padding: 40px 20px;
+    border-radius: 16px;
+  }
+  
+  .cta-content h2 {
+    font-size: 28px;
+  }
+  
+  .cta-content p {
+    font-size: 16px;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .cta-button {
+    width: 100%;
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+}
+
+/* ==========================================
+   ABOUT PAGE - SMALL MOBILE
+========================================== */
+@media screen and (max-width: 480px) {
+  .about-hero h1 {
+    font-size: 26px;
+  }
+  
+  .hero-subtitle {
+    font-size: 14px;
+  }
+  
+  .about-section h2 {
+    font-size: 24px;
+  }
+  
+  .card-icon {
+    font-size: 50px;
+  }
+  
+  .mission-card h3 {
+    font-size: 20px;
+  }
+  
+  .value-icon {
+    font-size: 40px;
+  }
+  
+  .value-card h3 {
+    font-size: 18px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-number {
+    font-size: 32px;
+  }
+  
+  .team-avatar {
+    font-size: 50px;
+  }
+  
+  .team-card h3 {
+    font-size: 18px;
+  }
+  
+  .cta-content h2 {
+    font-size: 24px;
+  }
+}
+
