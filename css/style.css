@@ -1490,4 +1490,218 @@ footer p {
     font-size: 24px;
   }
 }
+/* ==========================================
+   CONTACT PAGE STYLES
+========================================== */
+
+.contact-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--bg-white);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.contact-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.contact-form .form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form .form-select {
+  padding: 14px 18px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  background: var(--bg-white);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-gray);
+  opacity: 0.6;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form .form-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+/* Select dropdown styling */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.form-select option {
+  padding: 10px;
+}
+
+/* Textarea */
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* Character counter */
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-top: -5px;
+}
+
+/* reCAPTCHA container */
+.recaptcha-container {
+  display: flex;
+  justify-content: center;
+}
+
+.recaptcha-container > div {
+  transform: scale(0.95);
+  transform-origin: 0 0;
+}
+
+/* Submit button */
+.contact-form .submit-button {
+  padding: 16px 32px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.contact-form .submit-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,123,255,0.4);
+}
+
+.contact-form .submit-button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Form messages */
+.contact-form .success-message,
+.contact-form .error-message {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: none;
+  animation: slideIn 0.3s ease;
+}
+
+.contact-form .success-message {
+  background: #d4edda;
+  border: 2px solid #28a745;
+  color: #155724;
+}
+
+.contact-form .error-message {
+  background: #f8d7da;
+  border: 2px solid #dc3545;
+  color: #721c24;
+  white-space: pre-line;
+}
+
+.contact-form .success-message.show,
+.contact-form .error-message.show {
+  display: block;
+}
+
+/* ==========================================
+   CONTACT PAGE - TABLET RESPONSIVE
+========================================== */
+@media screen and (max-width: 1024px) {
+  .contact-form-container {
+    padding: 35px 30px;
+  }
+}
+
+/* ==========================================
+   CONTACT PAGE - MOBILE RESPONSIVE
+========================================== */
+@media screen and (max-width: 768px) {
+  .contact-form-container {
+    padding: 30px 20px;
+    border-radius: 12px;
+  }
+  
+  .contact-form {
+    gap: 20px;
+  }
+  
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form .form-select {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .contact-form .form-group label {
+    font-size: 13px;
+  }
+  
+  .recaptcha-container > div {
+    transform: scale(0.85);
+  }
+  
+  .contact-form .submit-button {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+}
+
+/* ==========================================
+   CONTACT PAGE - SMALL MOBILE
+========================================== */
+@media screen and (max-width: 480px) {
+  .contact-form-container {
+    padding: 25px 15px;
+  }
+  
+  .recaptcha-container > div {
+    transform: scale(0.75);
+  }
+  
+  .contact-form .submit-button {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
 
