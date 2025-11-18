@@ -106,7 +106,7 @@
           
           <!-- reCAPTCHA -->
           <div class="form-group recaptcha-container">
-            <div class="g-recaptcha" data-sitekey="6LfYourSiteKey"></div>
+            <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
           </div>
           
           <!-- Submit Button -->
@@ -134,6 +134,11 @@
   
   <!-- JavaScript -->
   <script>
+    // ==========================================
+    // CONFIGURATION
+    // ==========================================
+    const API_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxkdC9jjvkbeDLv0BE9ik_nl6HAwpAPWN3cc8j3JxQZrzCZyi0q8yRfADomrGPCtUw/exec'; // ⚠️ THAY URL API Ở ĐÂY
+    
     // ==========================================
     // Mobile Menu Toggle
     // ==========================================
@@ -300,47 +305,40 @@
       submitButton.disabled = true;
       submitButton.textContent = '⏳ Sending...';
       
-      // Simulate API call (replace with actual endpoint)
-      setTimeout(() => {
-        // Success
-        showFormSuccess('✅ Thank you! Your message has been sent successfully. We will get back to you soon.');
-        
-        // Reset form
-        document.getElementById('contactForm').reset();
-        document.getElementById('charCount').textContent = '0';
-        grecaptcha.reset();
-        
-        submitButton.disabled = false;
-        submitButton.textContent = 'Submit';
-      }, 1500);
-      
-      // For actual implementation, use fetch:
-      /*
-      fetch('YOUR_API_ENDPOINT', {
+      // Call API
+      fetch(API_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'text/plain',
+        },
         body: JSON.stringify(formData)
       })
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          showFormSuccess('✅ Thank you! Your message has been sent successfully.');
+          showFormSuccess(data.message);
+          
+          // Reset form
           document.getElementById('contactForm').reset();
+          document.getElementById('charCount').textContent = '0';
           grecaptcha.reset();
         } else {
-          showFormError('❌ Error: ' + (data.message || 'Failed to send message'));
+          showFormError('❌ ' + data.message);
         }
       })
       .catch(error => {
-        showFormError('❌ Network error. Please try again later.');
+        console.error('Error:', error);
+        showFormError('❌ Network error. Please check:\n1. API URL is correct\n2. Apps Script is deployed\n3. Try again later');
       })
       .finally(() => {
         submitButton.disabled = false;
         submitButton.textContent = 'Submit';
       });
-      */
     }
     
+    // ==========================================
+    // Helper Functions
+    // ==========================================
     function showFormSuccess(message) {
       const successMessage = document.getElementById('form-success-message');
       successMessage.textContent = message;
