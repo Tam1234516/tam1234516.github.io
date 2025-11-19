@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - Artoon Games</title>
+  <meta name="description" content="Read the latest news and articles from Artoon Games">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <div class="logo" onclick="window.location.href='index.html'">
+        <img src="images/logo.png" alt="Artoon Logo" />
+      </div>
+      
+      <button class="menu-toggle" onclick="toggleMenu(event)" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      
+      <div class="nav-wrapper">
+        <nav class="nav-menu">
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="blog.html" class="active">BLOG</a></li>
+            <li><a href="mobile-games.html">MOBILE GAMES</a></li>
+            <li><a href="test-games.html">TEST GAMES</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+            <li><a href="contact.html">CONTACT US</a></li>
+          </ul>
+          <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <img src="images/facebook.png" alt="Facebook" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <img src="images/instagram.png" alt="Instagram" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <img src="images/twitter.png" alt="Twitter" />
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+              <img src="images/youtube.png" alt="YouTube" />
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <!-- MAIN CONTENT -->
+  <main>
+    <section class="blog-section">
+      <div class="blog-header">
+        <h1>Our Blog</h1>
+        <p>Stay updated with the latest news, tips, and stories from Artoon Games</p>
+      </div>
+      
+      <!-- Blog Posts Grid -->
+      <div id="blog-posts-container" class="blog-grid">
+        <!-- Demo Post -->
+        <article class="blog-card" onclick="viewBlogPost('demo-post-1')">
+          <div class="blog-card-image">
+            <img src="images/blog-placeholder.jpg" alt="Blog Post" />
+            <div class="blog-card-category">News</div>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span class="blog-date">📅 January 15, 2025</span>
+              <span class="blog-author">✍️ Admin</span>
+            </div>
+            <h3 class="blog-card-title">Blog Post Title Here</h3>
+            <p class="blog-card-excerpt">
+              This is a demo blog post. Add your blog posts data in the blogPosts array below. 
+              Click to read the full article...
+            </p>
+            <div class="blog-card-footer">
+              <span class="read-more">Read More →</span>
+            </div>
+          </div>
+        </article>
+        
+        <!-- More posts will be loaded from blogPosts array -->
+      </div>
+      
+      <!-- No Posts Message -->
+      <div id="no-posts-message" class="no-posts" style="display: none;">
+        <p>📝 No blog posts yet. Add posts to the blogPosts array.</p>
+      </div>
+    </section>
+  </main>
+  
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Artoon Games. All rights reserved.</p>
+  </footer>
+  
+  <!-- Floating Contact Button -->
+  <a href="contact.html" class="floating-contact" aria-label="Contact Us">
+    <img src="images/contact-icon.png" alt="Contact" />
+  </a>
+  
+  <!-- JavaScript -->
+  <script>
+    // ==========================================
+    // BLOG POSTS DATA - Thêm blog posts vào đây
+    // ==========================================
+    let blogPosts = [];
+
+async function loadBlogPosts() {
+  try {
+    const response = await fetch('data/blog-posts.json');
+    blogPosts = await response.json();
+    
+    // existing rendering code
+    const container = document.getElementById('blog-posts-container');
+    // ... rest of code
+  } catch (error) {
+    console.log('Could not load blog posts:', error);
+  }
+}
+    
+    // ==========================================
+    // Mobile Menu Toggle
+    // ==========================================
+    function toggleMenu(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      
+      setTimeout(function() {
+        const navWrapper = document.querySelector('.nav-wrapper');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (!navWrapper || !menuToggle) return;
+        
+        navWrapper.classList.toggle('show');
+        
+        if (navWrapper.classList.contains('show')) {
+          menuToggle.innerHTML = '✕';
+          menuToggle.setAttribute('aria-expanded', 'true');
+        } else {
+          menuToggle.innerHTML = '☰';
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      }, 50);
+    }
+    
+    document.addEventListener('click', function(event) {
+      if (window.innerWidth <= 768) {
+        setTimeout(function() {
+          const navWrapper = document.querySelector('.nav-wrapper');
+          const menuToggle = document.querySelector('.menu-toggle');
+          const header = document.querySelector('header');
+          
+          if (!navWrapper || !menuToggle || !header) return;
+          
+          if (!header.contains(event.target) && navWrapper.classList.contains('show')) {
+            navWrapper.classList.remove('show');
+            menuToggle.innerHTML = '☰';
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        }, 50);
+      }
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(event) {
+        if (window.innerWidth <= 768) {
+          const target = event.target.closest('.nav-menu a');
+          
+          if (target) {
+            setTimeout(function() {
+              const navWrapper = document.querySelector('.nav-wrapper');
+              const menuToggle = document.querySelector('.menu-toggle');
+              
+              if (!navWrapper || !menuToggle) return;
+              
+              navWrapper.classList.remove('show');
+              menuToggle.innerHTML = '☰';
+              menuToggle.setAttribute('aria-expanded', 'false');
+            }, 100);
+          }
+        }
+      });
+      
+      // Load blog posts
+      loadBlogPosts();
+    });
+    
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        const navWrapper = document.querySelector('.nav-wrapper');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (!navWrapper || !menuToggle) return;
+        
+        if (window.innerWidth > 768) {
+          navWrapper.classList.remove('show');
+          menuToggle.innerHTML = '☰';
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      }, 100);
+    });
+    
+    if (typeof MutationObserver !== 'undefined') {
+      const observer = new MutationObserver(function(mutations) {
+        const menuToggle = document.querySelector('.menu-toggle');
+        if (menuToggle && !menuToggle.hasAttribute('data-listener-attached')) {
+          menuToggle.setAttribute('data-listener-attached', 'true');
+        }
+      });
+      
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
+    
+    // ==========================================
+    // LOAD BLOG POSTS
+    // ==========================================
+    function loadBlogPosts() {
+      const container = document.getElementById('blog-posts-container');
+      const noPostsMessage = document.getElementById('no-posts-message');
+      
+      if (!blogPosts || blogPosts.length === 0) {
+        noPostsMessage.style.display = 'block';
+        return;
+      }
+      
+      // Clear container (keep demo post or remove it)
+      container.innerHTML = '';
+      
+      // Render blog posts
+      blogPosts.forEach(post => {
+        const postCard = createBlogCard(post);
+        container.appendChild(postCard);
+      });
+    }
+    
+    // ==========================================
+    // CREATE BLOG CARD
+    // ==========================================
+    function createBlogCard(post) {
+      const article = document.createElement('article');
+      article.className = 'blog-card';
+      article.onclick = () => viewBlogPost(post.id);
+      
+      article.innerHTML = `
+        <div class="blog-card-image">
+          <img src="${post.image}" alt="${post.title}" />
+          <div class="blog-card-category">${post.category}</div>
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-meta">
+            <span class="blog-date">📅 ${post.date}</span>
+            <span class="blog-author">✍️ ${post.author}</span>
+          </div>
+          <h3 class="blog-card-title">${post.title}</h3>
+          <p class="blog-card-excerpt">${post.excerpt}</p>
+          <div class="blog-card-footer">
+            <span class="read-more">Read More →</span>
+          </div>
+        </div>
+      `;
+      
+      return article;
+    }
+    
+    // ==========================================
+    // VIEW BLOG POST DETAIL
+    // ==========================================
+    function viewBlogPost(postId) {
+      // Save post ID to localStorage and redirect to blog-detail.html
+      localStorage.setItem('currentBlogPost', postId);
+      window.location.href = `blog-detail.html?id=${postId}`;
+    }
+  </script>
+</body>
+</html>
