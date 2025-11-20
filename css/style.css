@@ -2115,75 +2115,67 @@ footer p {
   }
 }
 /* ==========================================
-   SCROLL SNAP - 3 BREAKPOINTS FIXED
-   Copy và paste đoạn này vào CUỐI file css/style.css
+   SCROLL SNAP - SEPARATE FILE
+   Paste đoạn này vào CUỐI file css/style.css
+   hoặc tạo file riêng: css/scroll-snap.css
    ========================================== */
 
-/* Bật scroll snap cho toàn trang */
+/* ==========================================
+   BẬT SCROLL SNAP CHO TOÀN TRANG
+   ========================================== */
 html {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity; /* Đổi từ mandatory sang proximity để mềm hơn */
   scroll-behavior: smooth;
 }
 
 body {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 /* ==========================================
-   BREAKPOINT 1: EXPLORE SECTION
+   FIX: THÊM PADDING-TOP CHO MAIN
+   Để không bị che bởi sticky header
+   ========================================== */
+main {
+  padding-top: 80px; /* Điều chỉnh theo chiều cao header của bạn */
+  margin-top: -80px; /* Offset để giữ vị trí ban đầu */
+}
+
+/* ==========================================
+   BREAKPOINT 1: EXPLORE SECTION (Đầu trang)
    ========================================== */
 .explore {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: 100vh;
+  scroll-margin-top: 80px; /* Quan trọng: Offset cho sticky header */
+  min-height: auto; /* Không force full height */
+  padding-top: 60px;
 }
 
-/* Các element con không snap */
+/* Tắt snap cho các element con */
 .explore h2,
-.search-container,
-.group-panel {
+.explore .search-container,
+.explore .group-panel {
   scroll-snap-align: none;
 }
 
 /* ==========================================
    BREAKPOINT 2: GAMES CONTAINER
-   Target element có chứa "TẢI GAME BÊN DƯỚI"
    ========================================== */
-
-/* Nếu có div với id="games-container" */
 #games-container {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: 100vh;
-  position: relative;
+  scroll-margin-top: 80px;
+  padding-top: 40px;
+  min-height: auto;
 }
 
-/* Hoặc nếu có section chứa games */
-section:has(#games-container) {
+/* Hoặc nếu có section wrapper */
+section.games-section {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-margin-top: 80px;
 }
 
 /* ==========================================
-   BREAKPOINT 3: Mỗi GAME CARD riêng lẻ (optional)
-   Bỏ comment nếu muốn mỗi game card là 1 breakpoint
-   ========================================== */
-
-/* 
-.game-card {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: 100vh;
-}
-*/
-
-/* Hoặc chỉ game card đầu tiên */
-.game-card:first-child {
-  scroll-snap-align: none; /* Tắt snap cho card đầu */
-}
-
-/* ==========================================
-   DISABLE SNAP CHO HEADER & FOOTER
+   TẮT SNAP CHO HEADER & FOOTER
    ========================================== */
 header {
   scroll-snap-align: none;
@@ -2194,6 +2186,7 @@ header {
 
 footer {
   scroll-snap-align: none;
+  min-height: auto;
 }
 
 .floating-contact {
@@ -2201,69 +2194,142 @@ footer {
 }
 
 /* ==========================================
-   Nếu bạn có H3 "TẢI GAME BÊN DƯỚI" riêng
+   OPTIONAL: Mỗi game card riêng (bỏ comment nếu cần)
    ========================================== */
-
-/* Tìm h3 chứa text này và làm nó sticky */
-main h3:has-text("TẢI"),
-main h3:has-text("GAME") {
-  position: sticky;
-  top: 0;
-  z-index: 99;
-  background: var(--bg-white);
-  padding: 20px;
-  margin: 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/*
+.game-card {
+  scroll-snap-align: start;
+  scroll-margin-top: 80px;
+  min-height: 100vh;
 }
+*/
 
-/* Hoặc target trực tiếp bằng nth-child nếu biết vị trí */
-.explore + h3,
-.group-panel + h3 {
+/* ==========================================
+   FIX: Nếu có heading "TẢI GAME BÊN DƯỚI"
+   ========================================== */
+.games-heading,
+#games-container > h3:first-child,
+.explore ~ h3 {
+  scroll-snap-align: start;
+  scroll-margin-top: 80px;
   position: sticky;
-  top: 0;
+  top: 70px; /* Dưới header một chút */
   z-index: 99;
   background: var(--bg-white);
   padding: 25px 30px;
-  margin: 0;
+  margin: 0 0 30px 0;
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
   text-align: center;
   font-size: 28px;
   font-weight: 900;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: 85px;
 }
 
 /* ==========================================
-   RESPONSIVE
+   RESPONSIVE - TABLET
    ========================================== */
 @media screen and (max-width: 1024px) {
-  .explore + h3,
-  .group-panel + h3 {
+  main {
+    padding-top: 70px;
+    margin-top: -70px;
+  }
+  
+  .explore,
+  #games-container {
+    scroll-margin-top: 70px;
+  }
+  
+  .games-heading,
+  #games-container > h3:first-child,
+  .explore ~ h3 {
+    scroll-margin-top: 70px;
+    top: 60px;
     padding: 22px 25px;
-    min-height: 80px;
     font-size: 24px;
   }
 }
 
+/* ==========================================
+   RESPONSIVE - MOBILE
+   ========================================== */
 @media screen and (max-width: 768px) {
+  /* Tắt scroll snap trên mobile để dễ scroll */
   html, body {
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none;
   }
   
-  .explore + h3,
-  .group-panel + h3 {
+  main {
+    padding-top: 60px;
+    margin-top: -60px;
+  }
+  
+  .explore,
+  #games-container {
+    scroll-margin-top: 60px;
+  }
+  
+  .games-heading,
+  #games-container > h3:first-child,
+  .explore ~ h3 {
+    scroll-margin-top: 60px;
+    top: 50px;
     padding: 20px 18px;
-    min-height: 75px;
     font-size: 20px;
   }
 }
 
+/* ==========================================
+   RESPONSIVE - SMALL MOBILE
+   ========================================== */
 @media screen and (max-width: 480px) {
-  .explore + h3,
-  .group-panel + h3 {
+  main {
+    padding-top: 55px;
+    margin-top: -55px;
+  }
+  
+  .explore,
+  #games-container {
+    scroll-margin-top: 55px;
+  }
+  
+  .games-heading,
+  #games-container > h3:first-child,
+  .explore ~ h3 {
+    scroll-margin-top: 55px;
+    top: 45px;
     padding: 18px 15px;
-    min-height: 70px;
-    font-size: 16px;
+    font-size: 18px;
   }
 }
+
+/* ==========================================
+   SMOOTH SCROLL CHO CÁC ANCHOR LINKS
+   ========================================== */
+a[href^="#"] {
+  scroll-margin-top: 100px;
+}
+
+/* ==========================================
+   TẮT SCROLL SNAP KHI ĐANG SEARCH
+   ========================================== */
+.search-results:not(.hidden) ~ * {
+  scroll-snap-align: none;
+}
+
+/* ==========================================
+   NOTES & TIPS:
+   
+   1. scroll-margin-top: Tạo khoảng cách từ top khi scroll đến element
+      → Fix vấn đề bị che bởi sticky header
+   
+   2. scroll-snap-type: proximity thay vì mandatory
+      → Cho phép scroll tự do hơn, chỉ snap khi gần điểm dừng
+   
+   3. min-height: auto thay vì 100vh
+      → Không force element phải full screen
+   
+   4. Tắt snap trên mobile để UX tốt hơn
+   
+   5. Điều chỉnh các giá trị padding-top và scroll-margin-top
+      theo chiều cao header thực tế của bạn
+      
+   ========================================== */
