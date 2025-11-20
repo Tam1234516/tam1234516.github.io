@@ -2114,222 +2114,75 @@ footer p {
     padding: 20px;
   }
 }
-/* ==========================================
-   SCROLL SNAP - SEPARATE FILE
-   Paste đoạn này vào CUỐI file css/style.css
-   hoặc tạo file riêng: css/scroll-snap.css
-   ========================================== */
+/* =============================
+   CĂN LẠI "TẢI GAME BÊN DƯỚI"
+   ============================= */
 
-/* ==========================================
-   BẬT SCROLL SNAP CHO TOÀN TRANG
-   ========================================== */
-html {
-  scroll-snap-type: y proximity; /* Đổi từ mandatory sang proximity để mềm hơn */
-  scroll-behavior: smooth;
+/* MẶC ĐỊNH CHO PC */
+.games-heading {
+    margin-top: -40px !important;   /* Kéo vào panel */
+    text-align: center;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.2;
+
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+
+    padding: 0 !important;
+
+    scroll-snap-align: start;
+    scroll-margin-top: 120px;       /* chống header che */
 }
 
-body {
-  scroll-snap-type: y proximity;
+/* Xóa khoảng giữa panel Gmail và heading */
+#test-group-section,
+form {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
-/* ==========================================
-   FIX: THÊM PADDING-TOP CHO MAIN
-   Để không bị che bởi sticky header
-   ========================================== */
-main {
-  padding-top: 80px; /* Điều chỉnh theo chiều cao header của bạn */
-  margin-top: -80px; /* Offset để giữ vị trí ban đầu */
+/* Tắt auto-focus kéo trang */
+input:focus {
+    scroll-margin-top: 150px;
 }
 
-/* ==========================================
-   BREAKPOINT 1: EXPLORE SECTION (Đầu trang)
-   ========================================== */
-.explore {
-  scroll-snap-align: start;
-  scroll-margin-top: 80px; /* Quan trọng: Offset cho sticky header */
-  min-height: auto; /* Không force full height */
-  padding-top: 60px;
+/* =============================
+   RESPONSIVE — TABLET
+   ============================= */
+@media (max-width: 992px) {
+    .games-heading {
+        margin-top: -35px !important;
+        font-size: 26px;
+        scroll-margin-top: 100px;
+    }
 }
 
-/* Tắt snap cho các element con */
-.explore h2,
-.explore .search-container,
-.explore .group-panel {
-  scroll-snap-align: none;
+/* =============================
+   RESPONSIVE — MOBILE
+   ============================= */
+@media (max-width: 600px) {
+    .games-heading {
+        margin-top: -30px !important;   /* ít kéo hơn tránh phá layout mobile */
+        font-size: 22px;
+        scroll-margin-top: 80px;
+    }
+
+    #test-group-section,
+    form {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
 }
 
-/* ==========================================
-   BREAKPOINT 2: GAMES CONTAINER
-   ========================================== */
-#games-container {
-  scroll-snap-align: start;
-  scroll-margin-top: 80px;
-  padding-top: 40px;
-  min-height: auto;
+/* =============================
+   RESPONSIVE — MOBILE NHỎ (iPhone SE)
+   ============================= */
+@media (max-width: 400px) {
+    .games-heading {
+        margin-top: -25px !important;
+        font-size: 20px;
+        scroll-margin-top: 70px;
+    }
 }
-
-/* Hoặc nếu có section wrapper */
-section.games-section {
-  scroll-snap-align: start;
-  scroll-margin-top: 80px;
-}
-
-/* ==========================================
-   TẮT SNAP CHO HEADER & FOOTER
-   ========================================== */
-header {
-  scroll-snap-align: none;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-footer {
-  scroll-snap-align: none;
-  min-height: auto;
-}
-
-.floating-contact {
-  scroll-snap-align: none;
-}
-
-/* ==========================================
-   OPTIONAL: Mỗi game card riêng (bỏ comment nếu cần)
-   ========================================== */
-/*
-.game-card {
-  scroll-snap-align: start;
-  scroll-margin-top: 80px;
-  min-height: 100vh;
-}
-*/
-
-/* ==========================================
-   FIX: Nếu có heading "TẢI GAME BÊN DƯỚI"
-   ========================================== */
-.games-heading,
-#games-container > h3:first-child,
-.explore ~ h3 {
-  scroll-snap-align: start;
-  scroll-margin-top: 80px;
-  position: sticky;
-  top: 70px; /* Dưới header một chút */
-  z-index: 99;
-  background: var(--bg-white);
-  padding: 25px 30px;
-  margin: 0 0 30px 0;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  text-align: center;
-  font-size: 28px;
-  font-weight: 900;
-}
-
-/* ==========================================
-   RESPONSIVE - TABLET
-   ========================================== */
-@media screen and (max-width: 1024px) {
-  main {
-    padding-top: 70px;
-    margin-top: -70px;
-  }
-  
-  .explore,
-  #games-container {
-    scroll-margin-top: 70px;
-  }
-  
-  .games-heading,
-  #games-container > h3:first-child,
-  .explore ~ h3 {
-    scroll-margin-top: 70px;
-    top: 60px;
-    padding: 22px 25px;
-    font-size: 24px;
-  }
-}
-
-/* ==========================================
-   RESPONSIVE - MOBILE
-   ========================================== */
-@media screen and (max-width: 768px) {
-  /* Tắt scroll snap trên mobile để dễ scroll */
-  html, body {
-    scroll-snap-type: none;
-  }
-  
-  main {
-    padding-top: 60px;
-    margin-top: -60px;
-  }
-  
-  .explore,
-  #games-container {
-    scroll-margin-top: 60px;
-  }
-  
-  .games-heading,
-  #games-container > h3:first-child,
-  .explore ~ h3 {
-    scroll-margin-top: 60px;
-    top: 50px;
-    padding: 20px 18px;
-    font-size: 20px;
-  }
-}
-
-/* ==========================================
-   RESPONSIVE - SMALL MOBILE
-   ========================================== */
-@media screen and (max-width: 480px) {
-  main {
-    padding-top: 55px;
-    margin-top: -55px;
-  }
-  
-  .explore,
-  #games-container {
-    scroll-margin-top: 55px;
-  }
-  
-  .games-heading,
-  #games-container > h3:first-child,
-  .explore ~ h3 {
-    scroll-margin-top: 55px;
-    top: 45px;
-    padding: 18px 15px;
-    font-size: 18px;
-  }
-}
-
-/* ==========================================
-   SMOOTH SCROLL CHO CÁC ANCHOR LINKS
-   ========================================== */
-a[href^="#"] {
-  scroll-margin-top: 100px;
-}
-
-/* ==========================================
-   TẮT SCROLL SNAP KHI ĐANG SEARCH
-   ========================================== */
-.search-results:not(.hidden) ~ * {
-  scroll-snap-align: none;
-}
-
-/* ==========================================
-   NOTES & TIPS:
-   
-   1. scroll-margin-top: Tạo khoảng cách từ top khi scroll đến element
-      → Fix vấn đề bị che bởi sticky header
-   
-   2. scroll-snap-type: proximity thay vì mandatory
-      → Cho phép scroll tự do hơn, chỉ snap khi gần điểm dừng
-   
-   3. min-height: auto thay vì 100vh
-      → Không force element phải full screen
-   
-   4. Tắt snap trên mobile để UX tốt hơn
-   
-   5. Điều chỉnh các giá trị padding-top và scroll-margin-top
-      theo chiều cao header thực tế của bạn
-      
-   ========================================== */
