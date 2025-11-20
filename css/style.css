@@ -2119,14 +2119,14 @@ footer p {
 ===================================== */
 
 html, body {
-    padding: 0;
     margin: 0;
+    padding: 0;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory; /* bật snap */
-    overscroll-behavior-y: contain; /* chống giật */
+    scroll-snap-type: y mandatory;
+    overscroll-behavior-y: contain; /* chống giật snap */
 }
 
-/* Header cố định KHÔNG tham gia snap */
+/* Header không tham gia snap */
 header {
     position: sticky;
     top: 0;
@@ -2134,22 +2134,21 @@ header {
     scroll-snap-align: none !important;
 }
 
-/* Không để header che nội dung snap */
+/* tránh header che nội dung */
 main {
     padding-top: 90px;
 }
 
 /* =====================================
-   SNAP BASE (áp dụng cho mọi section)
+   BASE SNAP SECTION
 ===================================== */
 
 .snap-section {
-    min-height: 100vh;               /* mỗi phần bằng đúng màn hình */
-    scroll-snap-align: start;        /* điểm neo chính xác nhất */
+    min-height: 100vh;         /* CHÌA KHÓA để snap không lệch */
+    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 20px;
 }
 
 /* =====================================
@@ -2157,29 +2156,31 @@ main {
 ===================================== */
 
 .explore {
-    composes: snap-section;
+    min-height: 100vh;
+    scroll-snap-align: start;
 }
 
-/* loại bỏ snap cho phần tử con */
 .explore * {
     scroll-snap-align: none !important;
 }
 
 /* =====================================
-   SNAP 2 — PANEL + HEADING
+   SNAP 2 — FORM + TẢI GAME
 ===================================== */
 
 .snap-break-2 {
-    composes: snap-section;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Heading test game đặt sát lên theo yêu cầu */
 .games-heading {
-    margin-top: -10px;
-    text-align: center;
+    margin-top: 10px !important;
     font-size: 36px;
     font-weight: 900;
-    scroll-snap-align: start; /* để heading là điểm snap */
+    text-align: center;
+    scroll-snap-align: start; /* heading là điểm neo snap */
 }
 
 /* =====================================
@@ -2187,16 +2188,17 @@ main {
 ===================================== */
 
 #games-container {
-    composes: snap-section;
+    min-height: 100vh;
+    scroll-snap-align: start;
     padding-top: 40px;
 }
 
 /* =====================================
-   INPUT / FOCUS FIX
+   INPUT FOCUS FIX
 ===================================== */
 
 input:focus {
-    scroll-margin-top: 120px; /* tránh nhảy sai khi focus */
+    scroll-margin-top: 120px !important;
 }
 
 /* =====================================
@@ -2210,6 +2212,7 @@ input:focus {
 
     .games-heading {
         font-size: 28px;
+        margin-top: 5px !important;
     }
 }
 
@@ -2224,7 +2227,7 @@ input:focus {
 
     .games-heading {
         font-size: 24px;
-        margin-top: -5px;
+        margin-top: 5px !important;
     }
 }
 
