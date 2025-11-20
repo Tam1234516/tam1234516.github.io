@@ -2115,10 +2115,11 @@ footer p {
   }
 }
 /* ==========================================
-   SCROLL SNAP - BREAKPOINT SECTIONS
+   SCROLL SNAP FIX - 3 BREAKPOINTS
+   Thêm vào cuối file style.css
 ========================================== */
 
-/* Áp dụng scroll snap cho body */
+/* Bật scroll snap */
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -2128,134 +2129,101 @@ body {
   scroll-snap-type: y mandatory;
 }
 
-/* Main container */
-main {
-  scroll-snap-type: y mandatory;
-}
-
-/* Mỗi section là 1 snap point */
+/* Section 1: Explore (bao gồm search + group panel) */
 .explore {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
 }
 
-/* Group Panel - Snap Point 1 */
-.group-panel {
+/* Section 2: Download Title - SNAP + STICKY */
+.download-games-title {
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  margin-bottom: 0;
-}
-
-/* Download Title - Snap Point 2 (STICKY + SNAP) */
-.download-games-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 25px 20px;
-  background: var(--bg-light);
   position: sticky;
   top: 0;
   z-index: 100;
+  background: var(--bg-light);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
-  margin: 0;
-  
-  /* Scroll snap - BẮT BUỘC dừng tại đây */
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  border-radius: 0;
+  margin: 0 !important;
+  padding: 25px 20px !important;
 }
 
-.download-games-title h3 {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--text-dark);
-  letter-spacing: 1px;
-  white-space: nowrap;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.title-line {
-  flex: 1;
-  height: 3px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--primary-blue) 50%, 
-    transparent 100%
-  );
-  max-width: 200px;
-}
-
-/* Games Container - Snap Point 3 */
+/* Section 3: Games Container */
 #games-container {
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  padding-top: 20px;
+  min-height: 100vh;
+  padding-top: 40px;
 }
 
-/* Mỗi game card cũng là snap point */
+/* Tắt snap cho các elements con không cần thiết */
+.group-panel {
+  scroll-snap-align: none;
+}
+
 .game-card {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
 }
 
-/* Tablet Responsive */
+/* Header không bị ảnh hưởng */
+header {
+  scroll-snap-align: none;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
 @media screen and (max-width: 1024px) {
-  .download-games-title {
-    padding: 20px 18px;
+  .explore {
+    min-height: 90vh;
+    padding-top: 50px;
   }
   
-  .download-games-title h3 {
-    font-size: 24px;
-  }
-  
-  .title-line {
-    max-width: 150px;
+  #games-container {
+    min-height: 90vh;
+    padding-top: 30px;
   }
 }
 
-/* Mobile Responsive - Snap mạnh hơn */
 @media screen and (max-width: 768px) {
-  html, body, main {
+  html, body {
     scroll-snap-type: y mandatory;
   }
   
+  .explore {
+    min-height: 100vh;
+    padding-top: 40px;
+  }
+  
   .download-games-title {
-    gap: 15px;
-    padding: 18px 15px;
-    scroll-snap-stop: always;
+    padding: 18px 15px !important;
   }
   
-  .download-games-title h3 {
-    font-size: 20px;
-  }
-  
-  .title-line {
-    max-width: 80px;
-    height: 2px;
-  }
-  
-  /* Mobile: mỗi game card snap riêng */
-  .game-card {
-    scroll-snap-align: center;
-    margin-bottom: 30px;
+  #games-container {
+    min-height: 100vh;
+    padding-top: 30px;
   }
 }
 
-/* Small Mobile */
 @media screen and (max-width: 480px) {
+  .explore {
+    padding-top: 30px;
+  }
+  
   .download-games-title {
-    gap: 10px;
-    padding: 15px 12px;
+    padding: 15px 12px !important;
   }
   
-  .download-games-title h3 {
-    font-size: 16px;
-    letter-spacing: 0.5px;
-  }
-  
-  .title-line {
-    max-width: 50px;
+  #games-container {
+    padding-top: 20px;
   }
 }
