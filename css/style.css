@@ -2249,3 +2249,37 @@ input:focus {
         font-size: 20px;
     }
 }
+/* --- Làm gọn phần trên của Snap 2 --- */
+
+/* Giảm khoảng cách dưới khối cảnh báo (ô màu vàng) */
+.snap-break-2 .warning-box {
+    margin-bottom: 8px !important;
+    padding: 10px 12px !important;
+}
+
+/* Thu nhỏ khoảng cách giữa các đoạn mô tả */
+.snap-break-2 .description,
+.snap-break-2 p {
+    margin-bottom: 6px !important;
+}
+
+/* Đẩy form lên sát hơn */
+.snap-break-2 form {
+    margin-top: 6px !important;
+    margin-bottom: 8px !important;
+}
+
+/* Tiêu đề “TẢI GAME BÊN DƯỚI” sát form */
+.snap-break-2 .games-heading {
+    margin-top: 4px !important;
+    margin-bottom: 10px !important;
+}
+
+/* Tối ưu căn snap cho toàn khối */
+.snap-break-2 {
+    scroll-snap-align: start;
+    padding-top: 12px !important;   /* giảm padding đầu */
+    padding-bottom: 20px !important; 
+}
+
+
