@@ -2115,21 +2115,31 @@ footer p {
   }
 }
 /* ==========================================
-   DOWNLOAD GAMES TITLE SECTION - STICKY
+   DOWNLOAD GAMES TITLE SECTION - SCROLL SNAP
 ========================================== */
+
+/* Áp dụng scroll snap cho container chính */
+main {
+  scroll-snap-type: y proximity;
+}
+
 .download-games-title {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
   margin: 50px 0 40px;
-  padding: 20px;
+  padding: 25px 20px;
   background: var(--bg-light);
   position: sticky;
-  top: 70px; /* Điều chỉnh tùy theo chiều cao header */
+  top: 0;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
+  
+  /* Scroll snap point */
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
 }
 
 .download-games-title h3 {
@@ -2153,56 +2163,17 @@ footer p {
   max-width: 200px;
 }
 
+/* Thêm scroll snap cho group panel */
+.group-panel {
+  scroll-snap-align: start;
+  scroll-margin-top: 20px;
+}
+
+/* Thêm scroll snap cho games container */
+#games-container {
+  scroll-snap-align: start;
+  scroll-margin-top: 100px;
+}
+
 /* Tablet Responsive */
-@media screen and (max-width: 1024px) {
-  .download-games-title {
-    top: 65px;
-    padding: 18px;
-  }
-  
-  .download-games-title h3 {
-    font-size: 24px;
-  }
-  
-  .title-line {
-    max-width: 150px;
-  }
-}
-
-/* Mobile Responsive */
-@media screen and (max-width: 768px) {
-  .download-games-title {
-    gap: 15px;
-    margin: 40px 0 30px;
-    top: 60px;
-    padding: 15px;
-  }
-  
-  .download-games-title h3 {
-    font-size: 20px;
-  }
-  
-  .title-line {
-    max-width: 80px;
-    height: 2px;
-  }
-}
-
-/* Small Mobile */
-@media screen and (max-width: 480px) {
-  .download-games-title {
-    gap: 10px;
-    margin: 30px 0 25px;
-    top: 55px;
-    padding: 12px;
-  }
-  
-  .download-games-title h3 {
-    font-size: 16px;
-    letter-spacing: 0.5px;
-  }
-  
-  .title-line {
-    max-width: 50px;
-  }
-}
+@media screen and (max-wi
