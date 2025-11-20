@@ -2115,20 +2115,43 @@ footer p {
   }
 }
 /* ==========================================
-   DOWNLOAD GAMES TITLE SECTION - SCROLL SNAP
+   SCROLL SNAP - BREAKPOINT SECTIONS
 ========================================== */
 
-/* Áp dụng scroll snap cho container chính */
-main {
-  scroll-snap-type: y proximity;
+/* Áp dụng scroll snap cho body */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
+body {
+  scroll-snap-type: y mandatory;
+}
+
+/* Main container */
+main {
+  scroll-snap-type: y mandatory;
+}
+
+/* Mỗi section là 1 snap point */
+.explore {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Group Panel - Snap Point 1 */
+.group-panel {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  margin-bottom: 0;
+}
+
+/* Download Title - Snap Point 2 (STICKY + SNAP) */
 .download-games-title {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin: 50px 0 40px;
   padding: 25px 20px;
   background: var(--bg-light);
   position: sticky;
@@ -2136,10 +2159,11 @@ main {
   z-index: 100;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
+  margin: 0;
   
-  /* Scroll snap point */
+  /* Scroll snap - BẮT BUỘC dừng tại đây */
   scroll-snap-align: start;
-  scroll-margin-top: 0;
+  scroll-snap-stop: always;
 }
 
 .download-games-title h3 {
@@ -2163,17 +2187,75 @@ main {
   max-width: 200px;
 }
 
-/* Thêm scroll snap cho group panel */
-.group-panel {
-  scroll-snap-align: start;
-  scroll-margin-top: 20px;
-}
-
-/* Thêm scroll snap cho games container */
+/* Games Container - Snap Point 3 */
 #games-container {
   scroll-snap-align: start;
-  scroll-margin-top: 100px;
+  scroll-snap-stop: always;
+  padding-top: 20px;
+}
+
+/* Mỗi game card cũng là snap point */
+.game-card {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Tablet Responsive */
-@media screen and (max-wi
+@media screen and (max-width: 1024px) {
+  .download-games-title {
+    padding: 20px 18px;
+  }
+  
+  .download-games-title h3 {
+    font-size: 24px;
+  }
+  
+  .title-line {
+    max-width: 150px;
+  }
+}
+
+/* Mobile Responsive - Snap mạnh hơn */
+@media screen and (max-width: 768px) {
+  html, body, main {
+    scroll-snap-type: y mandatory;
+  }
+  
+  .download-games-title {
+    gap: 15px;
+    padding: 18px 15px;
+    scroll-snap-stop: always;
+  }
+  
+  .download-games-title h3 {
+    font-size: 20px;
+  }
+  
+  .title-line {
+    max-width: 80px;
+    height: 2px;
+  }
+  
+  /* Mobile: mỗi game card snap riêng */
+  .game-card {
+    scroll-snap-align: center;
+    margin-bottom: 30px;
+  }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 480px) {
+  .download-games-title {
+    gap: 10px;
+    padding: 15px 12px;
+  }
+  
+  .download-games-title h3 {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+  }
+  
+  .title-line {
+    max-width: 50px;
+  }
+}
