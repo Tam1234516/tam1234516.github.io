@@ -2114,172 +2114,130 @@ footer p {
     padding: 20px;
   }
 }
-/* =============================
-   GLOBAL SNAP SETTINGS
-   ============================= */
+/* =====================================
+   GLOBAL
+===================================== */
+
 html, body {
+    padding: 0;
+    margin: 0;
     scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
+    scroll-snap-type: y mandatory; /* bật snap */
+    overscroll-behavior-y: contain; /* chống giật */
 }
 
-/* sticky header không tham gia snap */
-header, footer {
+/* Header cố định KHÔNG tham gia snap */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
     scroll-snap-align: none !important;
 }
 
-/* chống bị header che */
+/* Không để header che nội dung snap */
 main {
-    padding-top: 80px;
-    margin-top: -80px;
+    padding-top: 90px;
 }
 
-/* =============================
-   SNAP BREAK 1 — EXPLORE
-   ============================= */
+/* =====================================
+   SNAP BASE (áp dụng cho mọi section)
+===================================== */
+
+.snap-section {
+    min-height: 100vh;               /* mỗi phần bằng đúng màn hình */
+    scroll-snap-align: start;        /* điểm neo chính xác nhất */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+/* =====================================
+   SNAP 1 — EXPLORE
+===================================== */
+
 .explore {
-    scroll-snap-align: start;
-    scroll-margin-top: 100px;
-    min-height: auto;
+    composes: snap-section;
 }
 
+/* loại bỏ snap cho phần tử con */
 .explore * {
-    scroll-snap-align: none;
+    scroll-snap-align: none !important;
 }
 
-/* =============================
-   SNAP BREAK 2 — PANEL + HEADING
-   ============================= */
+/* =====================================
+   SNAP 2 — PANEL + HEADING
+===================================== */
+
 .snap-break-2 {
-    scroll-snap-align: start;
-    scroll-margin-top: 140px !important;   /* ⬅ FIX: đảm bảo form + heading lọt vào */
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-    position: relative;
+    composes: snap-section;
 }
 
-/* Heading nằm ngay bên dưới form — SÁT LÊN TRÊN VÀ THUỘC SNAP 2 */
+/* Heading test game đặt sát lên theo yêu cầu */
 .games-heading {
-    scroll-snap-align: start !important;  /* ⬅ FIX: heading thuộc snap 2 */
-    margin-top: 10px !important;          /* ⬅ FIX: không dùng margin âm */
+    margin-top: -10px;
     text-align: center;
     font-size: 36px;
     font-weight: 900;
-    background: transparent !important;
-    padding: 0 !important;
+    scroll-snap-align: start; /* để heading là điểm snap */
 }
 
-/* Fix auto focus kéo trang */
-input:focus {
-    scroll-margin-top: 160px !important;   /* ⬅ FIX: chống lệch khi focus */
-}
+/* =====================================
+   SNAP 3 — GAMES LIST
+===================================== */
 
-/* =============================
-   SNAP BREAK 3 — GAMES LIST
-   ============================= */
-#games-container,
-.games-section {
-    scroll-snap-align: start;
-    scroll-margin-top: 120px;
+#games-container {
+    composes: snap-section;
     padding-top: 40px;
 }
 
-/* =============================
-   RESPONSIVE — TABLET (<992px)
-   ============================= */
+/* =====================================
+   INPUT / FOCUS FIX
+===================================== */
+
+input:focus {
+    scroll-margin-top: 120px; /* tránh nhảy sai khi focus */
+}
+
+/* =====================================
+   RESPONSIVE — TABLET
+===================================== */
+
 @media (max-width: 992px) {
     main {
-        padding-top: 70px;
-        margin-top: -70px;
-    }
-
-    .explore,
-    .snap-break-2,
-    #games-container {
-        scroll-margin-top: 110px !important;   /* ⬅ nâng margin để đúng vị trí */
+        padding-top: 75px;
     }
 
     .games-heading {
-        margin-top: 5px !important;           /* ⬅ không dùng margin âm */
-        font-size: 26px;
+        font-size: 28px;
     }
 }
 
-/* =============================
-   RESPONSIVE — MOBILE (<768px)
-   ============================= */
+/* =====================================
+   RESPONSIVE — MOBILE
+===================================== */
+
 @media (max-width: 768px) {
-    html, body {
-        scroll-snap-type: y proximity !important;
-    }
-
     main {
-        padding-top: 60px;
-        margin-top: -60px;
-    }
-
-    .explore,
-    .snap-break-2,
-    #games-container {
-        scroll-margin-top: 100px !important;  /* ⬅ để snap chuẩn hơn */
+        padding-top: 65px;
     }
 
     .games-heading {
-        margin-top: 5px !important;
-        font-size: 22px;
+        font-size: 24px;
+        margin-top: -5px;
     }
 }
 
-/* =============================
-   SMALL MOBILE (<480px)
-   ============================= */
+/* =====================================
+   SMALL MOBILE
+===================================== */
+
 @media (max-width: 480px) {
     main {
         padding-top: 55px;
-        margin-top: -55px;
-    }
-
-    .explore,
-    .snap-break-2,
-    #games-container {
-        scroll-margin-top: 90px !important;
     }
 
     .games-heading {
-        margin-top: 5px !important;
         font-size: 20px;
     }
 }
-/* --- Làm gọn phần trên của Snap 2 --- */
-
-/* Giảm khoảng cách dưới khối cảnh báo (ô màu vàng) */
-.snap-break-2 .warning-box {
-    margin-bottom: 8px !important;
-    padding: 10px 12px !important;
-}
-
-/* Thu nhỏ khoảng cách giữa các đoạn mô tả */
-.snap-break-2 .description,
-.snap-break-2 p {
-    margin-bottom: 6px !important;
-}
-
-/* Đẩy form lên sát hơn */
-.snap-break-2 form {
-    margin-top: 6px !important;
-    margin-bottom: 8px !important;
-}
-
-/* Tiêu đề “TẢI GAME BÊN DƯỚI” sát form */
-.snap-break-2 .games-heading {
-    margin-top: 4px !important;
-    margin-bottom: 10px !important;
-}
-
-/* Tối ưu căn snap cho toàn khối */
-.snap-break-2 {
-    scroll-snap-align: start;
-    padding-top: 12px !important;   /* giảm padding đầu */
-    padding-bottom: 20px !important; 
-}
-
-
