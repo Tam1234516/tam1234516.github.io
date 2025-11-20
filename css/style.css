@@ -2151,26 +2151,26 @@ main {
    ============================= */
 .snap-break-2 {
     scroll-snap-align: start;
-    scroll-margin-top: 100px; /* snap bắt đúng vị trí */
+    scroll-margin-top: 140px !important;   /* ⬅ FIX: đảm bảo form + heading lọt vào */
     padding-top: 0 !important;
     margin-top: 0 !important;
     position: relative;
 }
 
-/* Heading nằm ngay bên dưới form — SÁT LÊN TRÊN */
+/* Heading nằm ngay bên dưới form — SÁT LÊN TRÊN VÀ THUỘC SNAP 2 */
 .games-heading {
-    margin-top: -20px !important; /* kéo sát lên gần như trong ảnh */
+    scroll-snap-align: start !important;  /* ⬅ FIX: heading thuộc snap 2 */
+    margin-top: 10px !important;          /* ⬅ FIX: không dùng margin âm */
     text-align: center;
-    font-size: 36px; /* chữ to như yêu cầu */
+    font-size: 36px;
     font-weight: 900;
     background: transparent !important;
     padding: 0 !important;
-    scroll-snap-align: start; /* CHO HEADING THAM GIA SNAP 2 */
 }
 
 /* Fix auto focus kéo trang */
 input:focus {
-    scroll-margin-top: 150px;
+    scroll-margin-top: 160px !important;   /* ⬅ FIX: chống lệch khi focus */
 }
 
 /* =============================
@@ -2195,11 +2195,11 @@ input:focus {
     .explore,
     .snap-break-2,
     #games-container {
-        scroll-margin-top: 90px;
+        scroll-margin-top: 110px !important;   /* ⬅ nâng margin để đúng vị trí */
     }
 
     .games-heading {
-        margin-top: -35px !important;
+        margin-top: 5px !important;           /* ⬅ không dùng margin âm */
         font-size: 26px;
     }
 }
@@ -2208,7 +2208,6 @@ input:focus {
    RESPONSIVE — MOBILE (<768px)
    ============================= */
 @media (max-width: 768px) {
-    /* bật lại snap vì mobile cũng cần 3 break */
     html, body {
         scroll-snap-type: y proximity !important;
     }
@@ -2221,11 +2220,11 @@ input:focus {
     .explore,
     .snap-break-2,
     #games-container {
-        scroll-margin-top: 70px;
+        scroll-margin-top: 100px !important;  /* ⬅ để snap chuẩn hơn */
     }
 
     .games-heading {
-        margin-top: -30px !important;
+        margin-top: 5px !important;
         font-size: 22px;
     }
 }
@@ -2242,11 +2241,11 @@ input:focus {
     .explore,
     .snap-break-2,
     #games-container {
-        scroll-margin-top: 60px;
+        scroll-margin-top: 90px !important;
     }
 
     .games-heading {
-        margin-top: -25px !important;
+        margin-top: 5px !important;
         font-size: 20px;
     }
 }
