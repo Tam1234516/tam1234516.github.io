@@ -2115,11 +2115,11 @@ footer p {
   }
 }
 /* ==========================================
-   SCROLL SNAP - 3 BREAKPOINTS HOÀN CHỈNH
-   Copy toàn bộ và paste vào cuối file css/style.css
+   SCROLL SNAP - 3 BREAKPOINTS FIXED
+   Xóa CSS cũ và thay bằng CSS này
 ========================================== */
 
-/* Bật scroll snap cho toàn trang */
+/* Bật scroll snap */
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -2127,76 +2127,90 @@ html {
 
 body {
   scroll-snap-type: y mandatory;
+  overflow-x: hidden;
 }
 
 /* ==========================================
-   SECTION 1: EXPLORE (Hero + Search + Group Panel)
+   SECTION 1: EXPLORE
 ========================================== */
 .explore {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   padding-top: 60px;
-  padding-bottom: 100px; /* Thêm khoảng cách để section 2 lòi ra */
+  padding-bottom: 0;
 }
 
-/* Tắt snap cho group panel */
+/* Group panel - tạo space để section 2 lòi ra */
 .group-panel {
   scroll-snap-align: none;
-  margin-bottom: 150px !important; /* Tạo khoảng trống lớn */
+  margin-bottom: 200px !important;
 }
 
 /* ==========================================
-   SECTION 2: DOWNLOAD TITLE (TẢI GAME BÊN DƯỚI)
-   - Sticky ở top
-   - Luôn lòi ra khi snap
+   SECTION 2: DOWNLOAD TITLE
+   - PHẢI LÒI RA HOÀN TOÀN
+   - STICKY Ở TOP
 ========================================== */
+
+/* Wrapper để tạo snap point riêng */
 .download-games-title {
-  scroll-snap-align: start;
+  /* Snap settings */
+  scroll-snap-align: center;
   scroll-snap-stop: always;
-  scroll-margin-top: 0;
   
-  /* Sticky positioning */
+  /* Sticky positioning - KHÔNG bị co */
   position: sticky;
-  top: 75px; /* Vị trí dính (điều chỉnh theo chiều cao header) */
+  top: 0;
   z-index: 100;
   
-  /* Styling */
-  background: var(--bg-white);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  border-radius: 0;
-  margin: 0 !important;
-  padding: 30px 20px !important;
-  min-height: 80px;
+  /* Layout - ĐẢM BẢO ĐỦ KHÔNG GIAN */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 20px !important;
+  width: 100% !important;
   
-  /* Đảm bảo luôn hiển thị */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+  /* Padding lớn để không bị co */
+  padding: 35px 40px !important;
+  margin: 0 !important;
+  
+  /* Styling */
+  background: var(--bg-white) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 0 !important;
+  
+  /* Chiều cao tối thiểu */
+  min-height: 100px !important;
+  
+  /* Đảm bảo không bị overflow */
+  overflow: visible !important;
+  flex-shrink: 0 !important;
 }
 
 .download-games-title h3 {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--text-dark);
-  letter-spacing: 1px;
-  white-space: nowrap;
-  margin: 0;
-  text-transform: uppercase;
+  font-size: 32px !important;
+  font-weight: 900 !important;
+  color: var(--text-dark) !important;
+  letter-spacing: 1.5px !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
+  flex-shrink: 0 !important;
+  line-height: 1.2 !important;
 }
 
 .title-line {
-  flex: 1;
-  height: 3px;
+  flex: 1 !important;
+  height: 4px !important;
   background: linear-gradient(90deg, 
     transparent 0%, 
     var(--primary-blue) 50%, 
     transparent 100%
-  );
-  max-width: 200px;
+  ) !important;
+  max-width: 250px !important;
+  min-width: 50px !important;
+  flex-shrink: 1 !important;
 }
 
 /* ==========================================
@@ -2206,17 +2220,15 @@ body {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   min-height: 100vh;
-  padding-top: 50px;
+  padding-top: 60px;
 }
 
-/* Tắt snap cho game cards riêng lẻ */
 .game-card {
   scroll-snap-align: none;
-  scroll-snap-stop: normal;
 }
 
 /* ==========================================
-   HEADER - Không bị ảnh hưởng bởi snap
+   HEADER
 ========================================== */
 header {
   scroll-snap-align: none;
@@ -2226,40 +2238,38 @@ header {
 }
 
 /* ==========================================
-   TABLET RESPONSIVE (768px - 1024px)
+   TABLET (768px - 1024px)
 ========================================== */
 @media screen and (max-width: 1024px) {
   .explore {
-    min-height: 95vh;
     padding-top: 50px;
-    padding-bottom: 80px;
   }
   
   .group-panel {
-    margin-bottom: 120px !important;
+    margin-bottom: 180px !important;
   }
   
   .download-games-title {
-    top: 70px;
-    padding: 25px 18px !important;
+    padding: 30px 35px !important;
+    min-height: 90px !important;
   }
   
   .download-games-title h3 {
-    font-size: 24px;
+    font-size: 28px !important;
   }
   
   .title-line {
-    max-width: 150px;
+    max-width: 200px !important;
+    height: 3px !important;
   }
   
   #games-container {
-    min-height: 95vh;
-    padding-top: 40px;
+    padding-top: 50px;
   }
 }
 
 /* ==========================================
-   MOBILE RESPONSIVE (< 768px)
+   MOBILE (< 768px)
 ========================================== */
 @media screen and (max-width: 768px) {
   html, body {
@@ -2267,33 +2277,31 @@ header {
   }
   
   .explore {
-    min-height: 100vh;
     padding-top: 40px;
-    padding-bottom: 60px;
   }
   
   .group-panel {
-    margin-bottom: 100px !important;
+    margin-bottom: 150px !important;
   }
   
   .download-games-title {
-    top: 60px;
-    padding: 20px 15px !important;
-    gap: 15px;
+    padding: 25px 20px !important;
+    gap: 15px !important;
+    min-height: 80px !important;
   }
   
   .download-games-title h3 {
-    font-size: 20px;
+    font-size: 22px !important;
+    letter-spacing: 1px !important;
   }
   
   .title-line {
-    max-width: 80px;
-    height: 2px;
+    max-width: 100px !important;
+    height: 3px !important;
   }
   
   #games-container {
-    min-height: 100vh;
-    padding-top: 30px;
+    padding-top: 40px;
   }
 }
 
@@ -2303,48 +2311,47 @@ header {
 @media screen and (max-width: 480px) {
   .explore {
     padding-top: 30px;
-    padding-bottom: 50px;
   }
   
   .group-panel {
-    margin-bottom: 80px !important;
+    margin-bottom: 120px !important;
   }
   
   .download-games-title {
-    top: 55px;
-    padding: 18px 12px !important;
-    gap: 10px;
+    padding: 20px 15px !important;
+    gap: 12px !important;
+    min-height: 70px !important;
+    flex-wrap: nowrap !important;
   }
   
   .download-games-title h3 {
-    font-size: 16px;
-    letter-spacing: 0.5px;
+    font-size: 18px !important;
+    letter-spacing: 0.8px !important;
   }
   
   .title-line {
-    max-width: 50px;
+    max-width: 60px !important;
+    min-width: 30px !important;
+    height: 2px !important;
   }
   
   #games-container {
-    padding-top: 25px;
+    padding-top: 30px;
   }
 }
 
 /* ==========================================
-   SCROLL BEHAVIOR ENHANCEMENTS
+   EXTRA: Đảm bảo không bị conflict
 ========================================== */
-
-/* Smooth scroll khi click vào anchor links */
-a[href^="#"] {
-  scroll-behavior: smooth;
-}
-
-/* Đảm bảo footer không bị ảnh hưởng */
 footer {
   scroll-snap-align: none;
 }
 
-/* Floating contact button không bị ảnh hưởng */
 .floating-contact {
   scroll-snap-align: none;
+}
+
+/* Force smooth scroll */
+* {
+  scroll-behavior: smooth;
 }
