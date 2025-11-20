@@ -2125,11 +2125,10 @@ html, body {
     scroll-snap-type: y mandatory;
     overscroll-behavior-y: contain;
 
-    /* FIX QUAN TRỌNG: chừa chỗ cho header sticky */
-    scroll-padding-top: 90px; 
+    /* chừa chỗ cho header sticky */
+    scroll-padding-top: 90px;
 }
 
-/* Header không tham gia snap */
 header {
     position: sticky;
     top: 0;
@@ -2137,7 +2136,6 @@ header {
     scroll-snap-align: none !important;
 }
 
-/* tránh header che nội dung */
 main {
     padding-top: 90px;
 }
@@ -2178,8 +2176,9 @@ main {
     flex-direction: column;
 }
 
+/* FIX QUAN TRỌNG — đưa tiêu đề lên cao hơn */
 .games-heading {
-    margin-top: 10px !important;
+    margin-top: 0 !important;
     font-size: 36px;
     font-weight: 900;
     text-align: center;
@@ -2209,17 +2208,18 @@ input:focus {
 ===================================== */
 
 @media (max-width: 992px) {
+
     main {
         padding-top: 75px;
     }
 
     html {
-        scroll-padding-top: 75px; /* match header height */
+        scroll-padding-top: 75px;
     }
 
     .games-heading {
         font-size: 28px;
-        margin-top: 5px !important;
+        margin-top: 0 !important;
     }
 }
 
@@ -2228,6 +2228,7 @@ input:focus {
 ===================================== */
 
 @media (max-width: 768px) {
+
     main {
         padding-top: 65px;
     }
@@ -2238,7 +2239,7 @@ input:focus {
 
     .games-heading {
         font-size: 24px;
-        margin-top: 5px !important;
+        margin-top: 0 !important;
     }
 }
 
@@ -2247,6 +2248,7 @@ input:focus {
 ===================================== */
 
 @media (max-width: 480px) {
+
     main {
         padding-top: 55px;
     }
@@ -2257,5 +2259,6 @@ input:focus {
 
     .games-heading {
         font-size: 20px;
+        margin-top: 0 !important;
     }
 }
