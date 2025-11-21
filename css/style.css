@@ -2252,3 +2252,33 @@ input:focus {
         scroll-margin-top: -140px !important;
     }
 }
+/* =====================================
+   AUTO SCROLL FIX - TẢI GAME BÊN DƯỚI
+===================================== */
+
+/* Đảm bảo heading có thể scroll đến */
+.games-heading,
+.download-games-title {
+  scroll-margin-top: 80px !important;
+  scroll-snap-align: start !important;
+}
+
+/* Khi success message show, tạo space */
+.success-message.show {
+  margin-bottom: 30px !important;
+  animation: slideIn 0.3s ease;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .games-heading,
+  .download-games-title {
+    scroll-margin-top: 60px !important;
+  }
+}
+
