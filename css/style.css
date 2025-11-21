@@ -2203,3 +2203,16 @@ input:focus {
 
     .games-heading { font-size: 22px; margin-top: -10px; }
 }
+/* ÉP TIÊU ĐỀ TẢI GAME BÊN DƯỚI DÍNH SÁT MÉP TRÊN KHUNG */
+.games-heading {
+    margin-top: 0 !important; 
+    padding-top: 0 !important;
+}
+
+/* XÓA KHOẢNG HỞ TRÊN CỦA KHUNG GAMES */
+#games-container {
+    padding-top: 5px !important;
+    margin-top: 0 !important;
+}
+
+
