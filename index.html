@@ -83,6 +83,8 @@
             <strong>⚠️ Lưu ý quan trọng:</strong>
             <ul>
               <li>Email phải trùng với email Google Play của bạn</li>
+              <li>Bạn sẽ nhận email mời tham gia Google Group</li>
+              <li>Click vào link trong email để hoàn tất việc tham gia</li>
               <li>Sau khi được duyệt, chờ 5-10 phút để hệ thống cập nhật</li>
             </ul>
           </div>
@@ -116,12 +118,6 @@
           </div>
         </div>
       </div>
-      <!-- Download Games Section Title -->
-<div class="download-games-title">
-  <div class="title-line"></div>
-  <h3>TẢI GAME BÊN DƯỚI</h3>
-  <div class="title-line"></div>
-</div>
       
       <!-- Games Container -->
       <div id="games-container">
@@ -367,7 +363,7 @@
       return localPart.substring(0, 3) + '***@' + domain;
     }
     
- function showSuccess(message) {
+    function showSuccess(message) {
       const successMessage = document.getElementById('success-message');
       successMessage.textContent = message;
       successMessage.classList.add('show');
@@ -380,12 +376,6 @@
         successMessage.classList.remove('show');
       }, 15000);
     }
-  
-  // Hide after 15 seconds
-  setTimeout(() => {
-    successMessage.classList.remove('show');
-  }, 15000);
-}
     
     function showError(message) {
       const errorMessage = document.getElementById('error-message');
