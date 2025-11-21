@@ -2267,6 +2267,31 @@ input:focus {
     font-size: 42px !important;
     font-weight: 900 !important;
 }
+@supports (scroll-snap-type: y mandatory) {
+    html, body {
+        overscroll-behavior-y: none !important;
+        scroll-snap-stop: always !important;
+    }
+}
+.snap-section,
+.snap-break-2,
+#games-container,
+.explore {
+    min-height: 100svh !important; /* Mobile viewport height chuẩn hơn 100vh */
+}
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+}
+
+@media (max-width: 768px) {
+    html {
+        scroll-snap-type: y mandatory; 
+        scroll-snap-stop: always;
+    }
+}
+
+
 
 
 
