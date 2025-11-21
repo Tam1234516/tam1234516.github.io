@@ -2263,7 +2263,7 @@ input:focus {
     }
 }
 .games-heading {
-    margin-top: -50px !important;
+    margin-top: -90px !important;
     font-size: 42px !important;
     font-weight: 900 !important;
 }
@@ -2290,6 +2290,7 @@ html {
         scroll-snap-stop: always;
     }
 }
+
 
 
 
