@@ -2219,3 +2219,29 @@ form {
 
     .games-heading { font-size: 24px; }
 }
+/* ============================================
+   FIX KHOẢNG TRỐNG TRÊN GAMES HEADING
+============================================ */
+
+/* Xóa toàn bộ margin/padding dưới của panel “Gửi yêu cầu tham gia” */
+#test-group-section,
+#test-group-section form,
+#test-group-section .form-container,
+form {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Ép phần tử phía dưới KHÔNG có khoảng trắng */
+#games-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Đảm bảo chữ “TẢI GAME BÊN DƯỚI” dính sát */
+.games-heading {
+    margin-top: -10px !important;  /* Đẩy lên gần hơn */
+    padding-top: 0 !important;
+}
+
+
