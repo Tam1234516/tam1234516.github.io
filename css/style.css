@@ -2123,16 +2123,18 @@ html, body {
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     overscroll-behavior-y: contain;
-    scroll-padding-top: 90px; /* chừa chỗ header */
+    scroll-padding-top: 90px; /* chừa header */
 }
 
+/* Giữ header cố định */
 header {
     position: sticky;
     top: 0;
     z-index: 9999;
-    scroll-snap-align: none !important;
+    background: white;
 }
 
+/* Tách nội dung khỏi header */
 main {
     padding-top: 90px;
 }
@@ -2144,75 +2146,76 @@ main {
 .snap-break-2,
 #games-container,
 .explore {
-    min-height: 100svh; /* chuẩn cho mobile */
+    min-height: 100svh; 
     scroll-snap-align: start;
     scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
 }
 
-/* =====================================
-   EXPLORE
-===================================== */
+/* Explore không cần snap */
 .explore * {
     scroll-snap-align: none !important;
 }
 
 /* =====================================
-   GAMES HEADING
+   GAMES HEADING — “TẢI GAME BÊN DƯỚI”
 ===================================== */
 .games-heading {
-    margin-top: -30px;  /* FIX quan trọng */
-    font-size: 42px;
+    margin: 0 !important;       /* ép sát lên form */
+    padding-top: 5px !important;
+    padding-bottom: 10px;
+    font-size: 40px;
     font-weight: 900;
     text-align: center;
     scroll-snap-align: start;
 }
 
 /* =====================================
-   INPUT FIX
+   FORM FIX — tránh tự kéo trang khi focus input
 ===================================== */
 input:focus {
-    scroll-margin-top: 120px !important;
+    scroll-margin-top: 140px !important;
+}
+
+/* =====================================
+   REMOVE EXTRA SPACING BETWEEN FORM & GAMES
+===================================== */
+#test-group-section,
+form {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#games-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 /* =====================================
    RESPONSIVE
 ===================================== */
 
+/* Tablet */
 @media (max-width: 992px) {
     main { padding-top: 75px; }
     html { scroll-padding-top: 75px; }
 
-    .games-heading { font-size: 30px; margin-top: -20px; }
+    .games-heading { font-size: 32px; }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
     main { padding-top: 65px; }
-    html { 
-        scroll-padding-top: 65px;
-        scroll-snap-type: y mandatory;  /* BẮT MOBILE SNAP MẠNH HƠN */
-    }
+    html { scroll-padding-top: 65px; }
 
-    .games-heading { font-size: 26px; margin-top: -15px; }
+    .games-heading { font-size: 28px; }
 }
 
+/* Small Mobile */
 @media (max-width: 480px) {
     main { padding-top: 55px; }
     html { scroll-padding-top: 55px; }
 
-    .games-heading { font-size: 22px; margin-top: -10px; }
+    .games-heading { font-size: 24px; }
 }
-/* ÉP TIÊU ĐỀ TẢI GAME BÊN DƯỚI DÍNH SÁT MÉP TRÊN KHUNG */
-.games-heading {
-    margin-top: 0 !important; 
-    padding-top: 0 !important;
-}
-
-/* XÓA KHOẢNG HỞ TRÊN CỦA KHUNG GAMES */
-#games-container {
-    padding-top: 5px !important;
-    margin-top: 0 !important;
-}
-
-
