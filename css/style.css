@@ -2123,10 +2123,9 @@ html, body {
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     overscroll-behavior-y: contain;
-    scroll-padding-top: 90px; /* chừa header */
+    scroll-padding-top: 90px;
 }
 
-/* Giữ header cố định */
 header {
     position: sticky;
     top: 0;
@@ -2134,7 +2133,6 @@ header {
     background: white;
 }
 
-/* Tách nội dung khỏi header */
 main {
     padding-top: 90px;
 }
@@ -2143,8 +2141,6 @@ main {
    SNAP SECTIONS
 ===================================== */
 .snap-section,
-.snap-break-2,
-#games-container,
 .explore {
     min-height: 100svh; 
     scroll-snap-align: start;
@@ -2153,69 +2149,86 @@ main {
     flex-direction: column;
 }
 
-/* Explore không cần snap */
 .explore * {
     scroll-snap-align: none !important;
 }
 
 /* =====================================
-   GAMES HEADING — “TẢI GAME BÊN DƯỚI”
+   BREAKPOINT 2: GAMES HEADING + GAMES CONTAINER
+   Gom chung để "TẢI GAME BÊN DƯỚI" dính sát form
 ===================================== */
 .games-heading {
-    margin: 0 !important;       /* ép sát lên form */
-    padding-top: 5px !important;
-    padding-bottom: 10px;
+    margin: 0 !important;
+    padding: 15px 20px !important;
     font-size: 40px;
     font-weight: 900;
     text-align: center;
+    background: white;
+    
+    /* KHÔNG snap riêng - để snap chung với #games-container */
+    scroll-snap-align: none !important;
+}
+
+/* Games container là breakpoint chính */
+#games-container {
     scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100svh;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 /* =====================================
-   FORM FIX — tránh tự kéo trang khi focus input
+   GIẢM KHOẢNG CÁCH GIỮA FORM VÀ TITLE
+===================================== */
+.group-panel,
+#test-group-section,
+form {
+    margin-bottom: 0 !important;
+    padding-bottom: 20px !important;
+}
+
+/* Heading dính sát form */
+.group-panel + .games-heading,
+form + .games-heading,
+#test-group-section + .games-heading {
+    margin-top: 0 !important;
+    padding-top: 30px !important;
+}
+
+/* =====================================
+   FORM FIX
 ===================================== */
 input:focus {
     scroll-margin-top: 140px !important;
 }
 
 /* =====================================
-   REMOVE EXTRA SPACING BETWEEN FORM & GAMES
-===================================== */
-#test-group-section,
-form {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-#games-container {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-/* =====================================
    RESPONSIVE
 ===================================== */
-
-/* Tablet */
 @media (max-width: 992px) {
     main { padding-top: 75px; }
     html { scroll-padding-top: 75px; }
-
-    .games-heading { font-size: 32px; }
+    .games-heading { 
+        font-size: 32px; 
+        padding: 12px 18px !important;
+    }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
     main { padding-top: 65px; }
     html { scroll-padding-top: 65px; }
-
-    .games-heading { font-size: 28px; }
+    .games-heading { 
+        font-size: 28px; 
+        padding: 10px 15px !important;
+    }
 }
 
-/* Small Mobile */
 @media (max-width: 480px) {
     main { padding-top: 55px; }
     html { scroll-padding-top: 55px; }
-
-    .games-heading { font-size: 24px; }
+    .games-heading { 
+        font-size: 24px; 
+        padding: 8px 12px !important;
+    }
 }
