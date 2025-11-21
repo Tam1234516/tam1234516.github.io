@@ -2117,16 +2117,13 @@ footer p {
 /* =====================================
    GLOBAL
 ===================================== */
-
 html, body {
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
     overscroll-behavior-y: contain;
-
-    /* chừa chỗ cho header sticky */
-    scroll-padding-top: 90px;
+    scroll-padding-top: 90px; /* chừa chỗ header */
 }
 
 header {
@@ -2141,158 +2138,68 @@ main {
 }
 
 /* =====================================
-   BASE SNAP SECTION
+   SNAP SECTIONS
 ===================================== */
-
-.snap-section {
-    min-height: 100vh;
+.snap-section,
+.snap-break-2,
+#games-container,
+.explore {
+    min-height: 100svh; /* chuẩn cho mobile */
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
 }
 
 /* =====================================
-   SNAP 1 — EXPLORE
+   EXPLORE
 ===================================== */
-
-.explore {
-    min-height: 100vh;
-    scroll-snap-align: start;
-}
-
 .explore * {
     scroll-snap-align: none !important;
 }
 
 /* =====================================
-   SNAP 2 — FORM + TẢI GAME
+   GAMES HEADING
 ===================================== */
-
-.snap-break-2 {
-    min-height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-}
-
-/* FIX QUAN TRỌNG — đưa tiêu đề lên cao hơn */
 .games-heading {
-    margin-top: 0 !important;
-    font-size: 36px;
+    margin-top: -30px;  /* FIX quan trọng */
+    font-size: 42px;
     font-weight: 900;
     text-align: center;
     scroll-snap-align: start;
 }
 
 /* =====================================
-   SNAP 3 — GAMES LIST
+   INPUT FIX
 ===================================== */
-
-#games-container {
-    min-height: 100vh;
-    scroll-snap-align: start;
-    padding-top: 40px;
-}
-
-/* =====================================
-   INPUT FOCUS FIX
-===================================== */
-
 input:focus {
     scroll-margin-top: 120px !important;
 }
 
 /* =====================================
-   RESPONSIVE — TABLET
+   RESPONSIVE
 ===================================== */
 
 @media (max-width: 992px) {
+    main { padding-top: 75px; }
+    html { scroll-padding-top: 75px; }
 
-    main {
-        padding-top: 75px;
-    }
-
-    html {
-        scroll-padding-top: 75px;
-    }
-
-    .games-heading {
-        font-size: 28px;
-        margin-top: 0 !important;
-    }
+    .games-heading { font-size: 30px; margin-top: -20px; }
 }
-
-/* =====================================
-   RESPONSIVE — MOBILE
-===================================== */
 
 @media (max-width: 768px) {
-
-    main {
-        padding-top: 65px;
-    }
-
-    html {
+    main { padding-top: 65px; }
+    html { 
         scroll-padding-top: 65px;
+        scroll-snap-type: y mandatory;  /* BẮT MOBILE SNAP MẠNH HƠN */
     }
 
-    .games-heading {
-        font-size: 24px;
-        margin-top: 0 !important;
-    }
+    .games-heading { font-size: 26px; margin-top: -15px; }
 }
-
-/* =====================================
-   SMALL MOBILE
-===================================== */
 
 @media (max-width: 480px) {
+    main { padding-top: 55px; }
+    html { scroll-padding-top: 55px; }
 
-    main {
-        padding-top: 55px;
-    }
-
-    html {
-        scroll-padding-top: 55px;
-    }
-
-    .games-heading {
-        font-size: 20px;
-        margin-top: 0 !important;
-    }
+    .games-heading { font-size: 22px; margin-top: -10px; }
 }
-.games-heading {
-    margin-top: -90px !important;
-    font-size: 42px !important;
-    font-weight: 900 !important;
-}
-@supports (scroll-snap-type: y mandatory) {
-    html, body {
-        overscroll-behavior-y: none !important;
-        scroll-snap-stop: always !important;
-    }
-}
-.snap-section,
-.snap-break-2,
-#games-container,
-.explore {
-    min-height: 100svh !important; /* Mobile viewport height chuẩn hơn 100vh */
-}
-html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
-}
-
-@media (max-width: 768px) {
-    html {
-        scroll-snap-type: y mandatory; 
-        scroll-snap-stop: always;
-    }
-}
-
-
-
-
-
-
