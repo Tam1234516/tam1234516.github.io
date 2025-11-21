@@ -2154,18 +2154,9 @@ main {
 }
 
 /* =====================================
-   BREAKPOINT 2: NÚT GỬI + TITLE "TẢI GAME BÊN DƯỚI"
-   Snap vào vị trí để thấy cả 2
+   BREAKPOINT 2: GAMES HEADING
+   Snap vào heading để thấy cả nút + title
 ===================================== */
-
-/* Wrapper chứa form - đây là điểm snap */
-.group-panel,
-#test-group-section {
-    scroll-snap-align: end !important;  /* Snap ở cuối panel */
-    scroll-snap-stop: always;
-}
-
-/* Games heading dính liền với form */
 .games-heading {
     margin: 0 !important;
     padding: 25px 20px !important;
@@ -2173,10 +2164,39 @@ main {
     font-weight: 900;
     text-align: center;
     background: white;
-    scroll-snap-align: none !important;
     
-    /* Đẩy lên sát form */
-    margin-top: -10px !important;
+    /* Snap vào heading này */
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always;
+    
+    /* Điều chỉnh scroll-margin để lùi lên trên */
+    /* Giá trị âm = kéo lên để thấy phần trên (nút + thông báo) */
+    scroll-margin-top: -200px !important;
+}
+
+/* =====================================
+   SUCCESS MESSAGE - Khi hiện thông báo
+===================================== */
+.success-message,
+.success-message.show,
+[class*="success"] {
+    margin-bottom: 20px !important;
+}
+
+/* Khi thông báo hiện, heading snap gần hơn */
+.success-message.show + .games-heading,
+.success-message:not(:empty) ~ .games-heading {
+    scroll-margin-top: -280px !important;
+}
+
+/* =====================================
+   GROUP PANEL / FORM SECTION
+===================================== */
+.group-panel,
+#test-group-section {
+    scroll-snap-align: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 30px !important;
 }
 
 /* =====================================
@@ -2188,25 +2208,6 @@ main {
     min-height: 100svh;
     margin-top: 0 !important;
     padding-top: 20px !important;
-}
-
-/* =====================================
-   GIẢM KHOẢNG CÁCH - DÍNH SÁT
-===================================== */
-.group-panel {
-    margin-bottom: 0 !important;
-    padding-bottom: 30px !important;
-}
-
-#test-group-section {
-    margin-bottom: 0 !important;
-    padding-bottom: 20px !important;
-}
-
-/* Nút Gửi Yêu Cầu */
-.join-button,
-button[type="submit"] {
-    margin-bottom: 0 !important;
 }
 
 /* =====================================
@@ -2226,6 +2227,7 @@ input:focus {
     .games-heading { 
         font-size: 32px; 
         padding: 20px 18px !important;
+        scroll-margin-top: -180px !important;
     }
 }
 
@@ -2236,6 +2238,7 @@ input:focus {
     .games-heading { 
         font-size: 28px; 
         padding: 18px 15px !important;
+        scroll-margin-top: -160px !important;
     }
 }
 
@@ -2246,5 +2249,6 @@ input:focus {
     .games-heading { 
         font-size: 24px; 
         padding: 15px 12px !important;
+        scroll-margin-top: -140px !important;
     }
 }
