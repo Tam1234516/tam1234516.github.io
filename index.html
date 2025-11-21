@@ -367,28 +367,19 @@
       return localPart.substring(0, 3) + '***@' + domain;
     }
     
-function showSuccess(message) {
-  const successMessage = document.getElementById('success-message');
-  successMessage.textContent = message;
-  successMessage.classList.add('show');
-  
-  // Scroll to message
-  successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  
-  // ✨ TỰ ĐỘNG SCROLL XUỐNG "TẢI GAME BÊN DƯỚI" SAU 2 GIÂY
-  setTimeout(() => {
-    const downloadTitle = document.querySelector('.download-games-title');
-    const gamesHeading = document.querySelector('.games-heading');
-    const targetElement = downloadTitle || gamesHeading;
-    
-    if (targetElement) {
-      // Scroll xuống mục "TẢI GAME BÊN DƯỚI"
-      targetElement.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
-      });
+ function showSuccess(message) {
+      const successMessage = document.getElementById('success-message');
+      successMessage.textContent = message;
+      successMessage.classList.add('show');
+      
+      // Scroll to message
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      
+      // Hide after 15 seconds
+      setTimeout(() => {
+        successMessage.classList.remove('show');
+      }, 15000);
     }
-  }, 2000); // Đợi 2 giây để user đọc thông báo
   
   // Hide after 15 seconds
   setTimeout(() => {
