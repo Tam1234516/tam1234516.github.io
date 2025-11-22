@@ -2115,25 +2115,21 @@ footer p {
   }
 }
 /* =====================================
-   SCROLL HINT - CHỈ ẨN KHI THỰC SỰ SCROLL ĐẾN GAMES
-   Xóa CSS cũ về chevron, thay bằng code này
+   SCROLL HINT - FIX CUỐI CÙNG
+   Xóa HẾT CSS chevron cũ, dùng code này
 ===================================== */
 
-/* Container */
+/* Thêm chevron cho GROUP PANEL trực tiếp */
 .group-panel {
     position: relative !important;
+    padding-bottom: 90px !important;
 }
 
-.group-form {
-    position: relative !important;
-    padding-bottom: 80px !important;
-}
-
-/* Chevron - LUÔN HIỂN THỊ MẶC ĐỊNH */
-.group-form::after {
+/* CHEVRON - Đặt trực tiếp trong group-panel */
+.group-panel::before {
     content: '' !important;
     position: absolute !important;
-    bottom: 15px !important;
+    bottom: 25px !important;
     left: 50% !important;
     margin-left: -15px !important;
     width: 30px !important;
@@ -2141,16 +2137,14 @@ footer p {
     border-left: 3px solid rgba(0, 123, 255, 0.85) !important;
     border-bottom: 3px solid rgba(0, 123, 255, 0.85) !important;
     transform: rotate(-45deg) !important;
-    animation: clearBounce 1.5s ease-in-out infinite !important;
+    animation: chevronBounce 1.5s ease-in-out infinite !important;
     pointer-events: none !important;
     z-index: 999 !important;
     display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
 }
 
 /* Animation */
-@keyframes clearBounce {
+@keyframes chevronBounce {
     0%, 100% {
         transform: rotate(-45deg) translateY(0);
         opacity: 0.4;
@@ -2168,63 +2162,67 @@ footer p {
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    height: 70px !important;
+    height: 80px !important;
     background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(245, 245, 245, 0.2) 30%,
-        rgba(245, 245, 245, 0.6) 70%,
-        rgba(255, 255, 255, 1) 100%
+        rgba(245, 245, 245, 0.3) 40%,
+        rgba(245, 245, 245, 0.7) 70%,
+        rgba(245, 245, 245, 1) 100%
     ) !important;
     pointer-events: none !important;
     z-index: 1 !important;
 }
 
-.group-form {
-    z-index: 10 !important;
-}
-
-/* =====================================
-   CHỈ ẨN KHI CÁC ĐIỀU KIỆN SAU:
-===================================== */
-
-/* Ẩn chỉ khi "TẢI GAME BÊN DƯỚI" visible trong viewport */
-.download-games-title.in-viewport ~ * .group-form::after {
+/* ẨN khi scroll đến games */
+body:has(.download-games-title:hover) .group-panel::before {
     opacity: 0 !important;
-    transition: opacity 0.5s ease !important;
 }
-
-/* KHÔNG dùng :target, :hover - Chỉ ẩn khi scroll thật sự */
 
 /* Mobile */
 @media (max-width: 768px) {
-    .group-form {
-        padding-bottom: 70px !important;
+    .group-panel {
+        padding-bottom: 80px !important;
     }
     
-    .group-form::after {
+    .group-panel::before {
         width: 28px !important;
         height: 28px !important;
         margin-left: -14px !important;
-        bottom: 12px !important;
+        bottom: 20px !important;
         border-width: 2.5px !important;
     }
     
     .group-panel::after {
-        height: 60px !important;
+        height: 70px !important;
     }
 }
 
 /* Tablet */
 @media (max-width: 1024px) {
-    .group-form {
-        padding-bottom: 75px !important;
+    .group-panel {
+        padding-bottom: 85px !important;
     }
     
-    .group-form::after {
+    .group-panel::before {
         width: 29px !important;
         height: 29px !important;
         margin-left: -14.5px !important;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .group-panel {
+        padding-bottom: 75px !important;
+    }
+    
+    .group-panel::before {
+        width: 26px !important;
+        height: 26px !important;
+        margin-left: -13px !important;
+        bottom: 18px !important;
+        border-width: 2.5px !important;
     }
     
     .group-panel::after {
@@ -2232,21 +2230,19 @@ footer p {
     }
 }
 
-/* Small Mobile */
-@media (max-width: 480px) {
-    .group-form {
-        padding-bottom: 65px !important;
-    }
-    
-    .group-form::after {
-        width: 26px !important;
-        height: 26px !important;
-        margin-left: -13px !important;
-        bottom: 10px !important;
-        border-width: 2.5px !important;
-    }
+/* XÓA MỌI PSEUDO-ELEMENT CŨ */
+.group-form::after,
+.group-form::before,
+.join-button::after,
+.join-button::before,
+.group-panel-content::after,
+.group-panel-content::before {
+    content: none !important;
+    display: none !important;
+}
     
     .group-panel::after {
         height: 55px !important;
     }
 }
+
