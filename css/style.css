@@ -2115,32 +2115,27 @@ footer p {
   }
 }
 /* =====================================
-   SCROLL HINT - FIX CUỐI CÙNG
-   Xóa HẾT CSS chevron cũ, dùng code này
+   SCROLL HINT - Chevron với HTML
 ===================================== */
 
-/* Thêm chevron cho GROUP PANEL trực tiếp */
-.group-panel {
-    position: relative !important;
-    padding-bottom: 90px !important;
+/* Container cho scroll hint */
+.scroll-hint {
+    text-align: center;
+    margin: 30px 0 0 0;
+    padding: 20px 0;
+    position: relative;
+    z-index: 10;
 }
 
-/* CHEVRON - Đặt trực tiếp trong group-panel */
-.group-panel::before {
-    content: '' !important;
-    position: absolute !important;
-    bottom: 25px !important;
-    left: 50% !important;
-    margin-left: -15px !important;
-    width: 30px !important;
-    height: 30px !important;
-    border-left: 3px solid rgba(0, 123, 255, 0.85) !important;
-    border-bottom: 3px solid rgba(0, 123, 255, 0.85) !important;
-    transform: rotate(-45deg) !important;
-    animation: chevronBounce 1.5s ease-in-out infinite !important;
-    pointer-events: none !important;
-    z-index: 999 !important;
-    display: block !important;
+/* Chevron icon */
+.chevron-icon {
+    width: 30px;
+    height: 30px;
+    border-left: 3px solid rgba(0, 123, 255, 0.85);
+    border-bottom: 3px solid rgba(0, 123, 255, 0.85);
+    transform: rotate(-45deg);
+    margin: 0 auto;
+    animation: chevronBounce 1.5s ease-in-out infinite;
 }
 
 /* Animation */
@@ -2155,94 +2150,72 @@ footer p {
     }
 }
 
-/* Fade gradient */
+/* Ẩn khi scroll đến games */
+.download-games-title ~ .scroll-hint {
+    display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .scroll-hint {
+        margin: 25px 0 0 0;
+        padding: 15px 0;
+    }
+    
+    .chevron-icon {
+        width: 28px;
+        height: 28px;
+        border-width: 2.5px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .scroll-hint {
+        margin: 28px 0 0 0;
+    }
+    
+    .chevron-icon {
+        width: 29px;
+        height: 29px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .scroll-hint {
+        margin: 20px 0 0 0;
+        padding: 12px 0;
+    }
+    
+    .chevron-icon {
+        width: 26px;
+        height: 26px;
+        border-width: 2.5px;
+    }
+}
+
+/* Fade gradient phía dưới form */
+.group-panel {
+    position: relative;
+}
+
 .group-panel::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 80px !important;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
     background: linear-gradient(
         to bottom,
         transparent 0%,
         rgba(245, 245, 245, 0.3) 40%,
         rgba(245, 245, 245, 0.7) 70%,
         rgba(245, 245, 245, 1) 100%
-    ) !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
-/* ẨN khi scroll đến games */
-body:has(.download-games-title:hover) .group-panel::before {
-    opacity: 0 !important;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .group-panel {
-        padding-bottom: 80px !important;
-    }
-    
-    .group-panel::before {
-        width: 28px !important;
-        height: 28px !important;
-        margin-left: -14px !important;
-        bottom: 20px !important;
-        border-width: 2.5px !important;
-    }
-    
-    .group-panel::after {
-        height: 70px !important;
-    }
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-    .group-panel {
-        padding-bottom: 85px !important;
-    }
-    
-    .group-panel::before {
-        width: 29px !important;
-        height: 29px !important;
-        margin-left: -14.5px !important;
-    }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-    .group-panel {
-        padding-bottom: 75px !important;
-    }
-    
-    .group-panel::before {
-        width: 26px !important;
-        height: 26px !important;
-        margin-left: -13px !important;
-        bottom: 18px !important;
-        border-width: 2.5px !important;
-    }
-    
-    .group-panel::after {
-        height: 65px !important;
-    }
-}
-
-/* XÓA MỌI PSEUDO-ELEMENT CŨ */
-.group-form::after,
-.group-form::before,
-.join-button::after,
-.join-button::before,
-.group-panel-content::after,
-.group-panel-content::before {
-    content: none !important;
-    display: none !important;
-}
-    
-    .group-panel::after {
-        height: 55px !important;
-    }
-}
 
