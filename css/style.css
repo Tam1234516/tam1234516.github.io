@@ -2115,17 +2115,20 @@ footer p {
   }
 }
 /* ==========================================
-   SCROLL DOWN ARROW
+   SCROLL DOWN ARROW - FIXED POSITION
 ========================================== */
 .scroll-arrow {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px auto;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  background: #f5f5f5;
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid #e0e0e0;
   color: #666;
   cursor: pointer;
@@ -2133,6 +2136,8 @@ footer p {
   animation: bounce 2s infinite;
   opacity: 1;
   visibility: visible;
+  z-index: 998;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .scroll-arrow.hidden {
@@ -2142,39 +2147,39 @@ footer p {
 }
 
 .scroll-arrow:hover {
-  background: #e8e8e8;
+  background: #f0f0f0;
   color: #333;
-  transform: scale(1.1);
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .scroll-arrow svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
 }
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
   40% {
-    transform: translateY(-8px);
+    transform: translateX(-50%) translateY(-8px);
   }
   60% {
-    transform: translateY(-4px);
+    transform: translateX(-50%) translateY(-4px);
   }
 }
 
 /* Responsive */
 @media screen and (max-width: 768px) {
   .scroll-arrow {
-    width: 36px;
-    height: 36px;
-    margin: 25px auto;
+    width: 40px;
+    height: 40px;
+    bottom: 90px;
   }
   
   .scroll-arrow svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
 }
-
