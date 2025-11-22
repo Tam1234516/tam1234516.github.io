@@ -2115,129 +2115,61 @@ footer p {
   }
 }
 /* =====================================
-   SCROLL INDICATOR - Visual Hint Phía Dưới
+   SCROLL HINT - Đơn giản và đẹp
 ===================================== */
 
-/* Đảm bảo group-panel có position relative */
+/* Chỉ cần mũi tên bounce dưới form */
+.group-form {
+    position: relative !important;
+    padding-bottom: 60px !important;
+}
+
+.group-form::after {
+    content: '⬇️' !important;
+    display: block !important;
+    text-align: center !important;
+    font-size: 40px !important;
+    margin-top: 30px !important;
+    animation: bounce 2s infinite !important;
+    opacity: 0.6 !important;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+    40% {
+        transform: translateY(-12px);
+        opacity: 1;
+    }
+    60% {
+        transform: translateY(-6px);
+        opacity: 0.8;
+    }
+}
+
+/* Fade effect ở cuối panel */
 .group-panel {
     position: relative !important;
     padding-bottom: 80px !important;
-    overflow: visible !important;
 }
 
-/* Fade gradient overlay ở cuối */
 .group-panel::after {
     content: '' !important;
     position: absolute !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    height: 100px !important;
+    height: 80px !important;
     background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(255, 255, 255, 0.5) 40%,
-        rgba(255, 255, 255, 0.9) 80%,
-        rgba(255, 255, 255, 1) 100%
+        rgba(245, 245, 245, 0.8) 70%,
+        rgba(245, 245, 245, 1) 100%
     ) !important;
     pointer-events: none !important;
-    z-index: 5 !important;
-    display: block !important;
-}
-
-/* Mũi tên bounce indicator */
-.group-panel .group-panel-content::after {
-    content: '⬇️' !important;
-    position: absolute !important;
-    bottom: -50px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    font-size: 48px !important;
-    color: #007bff !important;
-    animation: bounceArrow 2s infinite !important;
-    z-index: 10 !important;
-    display: block !important;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
-}
-
-/* Hoặc dùng text hint */
-.group-panel-content::before {
-    content: 'Vuốt xuống để xem game 👇' !important;
-    position: absolute !important;
-    bottom: -45px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    background: #007bff !important;
-    color: white !important;
-    padding: 12px 30px !important;
-    border-radius: 30px !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    white-space: nowrap !important;
-    box-shadow: 0 4px 20px rgba(0,123,255,0.4) !important;
-    animation: pulseScale 2s infinite !important;
-    z-index: 10 !important;
-    display: block !important;
-}
-
-/* Animation bounce */
-@keyframes bounceArrow {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(-15px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(-8px);
-    }
-}
-
-/* Animation pulse scale */
-@keyframes pulseScale {
-    0%, 100% {
-        transform: translateX(-50%) scale(1);
-        opacity: 0.9;
-    }
-    50% {
-        transform: translateX(-50%) scale(1.05);
-        opacity: 1;
-    }
 }
 
 /* Mobile */
-@media (max-width: 768px) {
-    .group-panel {
-        padding-bottom: 70px !important;
-    }
-    
-    .group-panel::after {
-        height: 80px !important;
-    }
-    
-    .group-panel-content::after {
-        font-size: 40px !important;
-        bottom: -45px !important;
-    }
-    
-    .group-panel-content::before {
-        font-size: 12px !important;
-        padding: 10px 24px !important;
-        bottom: -40px !important;
-    }
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-    .group-panel {
-        padding-bottom: 75px !important;
-    }
-    
-    .group-panel-content::after {
-        font-size: 44px !important;
-    }
-    
-    .group-panel-content::before {
-        font-size: 13px !important;
-    }
-}
+@m
