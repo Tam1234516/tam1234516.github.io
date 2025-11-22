@@ -474,46 +474,6 @@
       });
     }
   </script>
-  <!-- ===== THÊM PHẦN NÀY VÀO ĐÂY ===== -->
-  
-  <!-- Scroll to Bottom Button - Giống Claude -->
-  <button class="scroll-to-bottom" id="scrollToBottom" aria-label="Scroll to bottom">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 4L10 16M10 16L6 12M10 16L14 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
 
-  <script>
-  // Scroll to Bottom Button - Giống Claude
-  (function() {
-    const scrollBtn = document.getElementById('scrollToBottom');
-    if (!scrollBtn) return;
-    
-    function checkScrollPosition() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const distanceFromBottom = documentHeight - (scrollTop + windowHeight);
-      
-      if (distanceFromBottom > 300) {
-        scrollBtn.classList.add('visible');
-      } else {
-        scrollBtn.classList.remove('visible');
-      }
-    }
-    
-    scrollBtn.addEventListener('click', function() {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth'
-      });
-    });
-    
-    window.addEventListener('scroll', checkScrollPosition);
-    checkScrollPosition();
-  })();
-  </script>
-  
-  <!-- ===== KẾT THÚC PHẦN THÊM ===== -->
 </body>
 </html>
