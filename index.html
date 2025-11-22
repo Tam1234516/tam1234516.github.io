@@ -119,6 +119,12 @@
           </div>
         </div>
       </div>
+      <!-- Scroll Down Arrow -->
+      <div class="scroll-arrow" onclick="document.getElementById('games-container').scrollIntoView({behavior: 'smooth'})">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M19 12l-7 7-7-7"/>
+        </svg>
+      </div>
        <!-- Download Games Section Title -->
 <div class="download-games-title">
   <div class="title-line"></div>
@@ -410,6 +416,25 @@
       if (e.key === 'Enter') {
         e.preventDefault();
         joinGroupWithAPI();
+      }
+    });
+    // ==========================================
+    // SCROLL ARROW VISIBILITY - THÊM VÀO ĐÂY
+    // ==========================================
+    window.addEventListener('scroll', function() {
+      const scrollArrow = document.querySelector('.scroll-arrow');
+      const footer = document.querySelector('footer');
+      
+      if (!scrollArrow || !footer) return;
+      
+      const footerTop = footer.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      
+      // Ẩn mũi tên khi footer xuất hiện trên màn hình
+      if (footerTop <= windowHeight) {
+        scrollArrow.classList.add('hidden');
+      } else {
+        scrollArrow.classList.remove('hidden');
       }
     });
     
