@@ -357,11 +357,8 @@
       } catch (error) {
         console.error('Error:', error);
         showError(
-          '❌ Không thể kết nối đến server.\n\n' +
-          'Vui lòng kiểm tra:\n' +
-          '1. URL API đúng chưa\n' +
-          '2. Google Apps Script đã deploy chưa\n' +
-          '3. Thử lại sau vài phút'
+          'Hệ thống đang load lại, vui lòng thử lại sau vài giây.\n\n' +
+          
         );
       } finally {
         joinButton.disabled = false;
