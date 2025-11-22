@@ -2115,8 +2115,8 @@ footer p {
   }
 }
 /* =====================================
-   SCROLL HINT - Chevron LUÔN HIỂN THỊ
-   Không bị khuất khi scroll lên
+   SCROLL HINT - CHỈ ẨN KHI THỰC SỰ SCROLL ĐẾN GAMES
+   Xóa CSS cũ về chevron, thay bằng code này
 ===================================== */
 
 /* Container */
@@ -2129,7 +2129,7 @@ footer p {
     padding-bottom: 80px !important;
 }
 
-/* Chevron - LUÔN Ở VỊ TRÍ CỐ ĐỊNH */
+/* Chevron - LUÔN HIỂN THỊ MẶC ĐỊNH */
 .group-form::after {
     content: '' !important;
     position: absolute !important;
@@ -2146,9 +2146,10 @@ footer p {
     z-index: 999 !important;
     display: block !important;
     opacity: 1 !important;
+    visibility: visible !important;
 }
 
-/* Animation NHẤP NHÁY RÕ */
+/* Animation */
 @keyframes clearBounce {
     0%, 100% {
         transform: rotate(-45deg) translateY(0);
@@ -2160,7 +2161,7 @@ footer p {
     }
 }
 
-/* Fade gradient - Không che mũi tên */
+/* Fade gradient */
 .group-panel::after {
     content: '' !important;
     position: absolute !important;
@@ -2179,22 +2180,21 @@ footer p {
     z-index: 1 !important;
 }
 
-/* ĐẢM BẢO chevron nằm trên gradient */
 .group-form {
     z-index: 10 !important;
 }
 
-/* CHỈ ẨN khi đã scroll đến GAMES SECTION */
-body:has(.download-games-title:hover) .group-form::after,
-#games-container:target ~ * .group-form::after {
+/* =====================================
+   CHỈ ẨN KHI CÁC ĐIỀU KIỆN SAU:
+===================================== */
+
+/* Ẩn chỉ khi "TẢI GAME BÊN DƯỚI" visible trong viewport */
+.download-games-title.in-viewport ~ * .group-form::after {
     opacity: 0 !important;
     transition: opacity 0.5s ease !important;
 }
 
-/* HOẶC ẩn khi footer visible */
-body:has(footer:hover) .group-form::after {
-    opacity: 0 !important;
-}
+/* KHÔNG dùng :target, :hover - Chỉ ẩn khi scroll thật sự */
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -2249,9 +2249,4 @@ body:has(footer:hover) .group-form::after {
     .group-panel::after {
         height: 55px !important;
     }
-}
-
-/* XÓA MỌI RULE ẨN CHEVRON CŨ */
-.group-form::after {
-    display: block !important;
 }
