@@ -20,10 +20,10 @@
       <div class="nav-wrapper">
         <nav class="nav-menu">
           <ul>
-            <li><a href="index.html">HOME</a></li>
+            <li><a href="index.html" >HOME</a></li>
             <li><a href="blog.html">BLOG</a></li>
             <li><a href="mobile-games.html">MOBILE GAMES</a></li>
-            <li><a href="test-games.html" class="active">TEST GAMES</a></li>
+            <li><a href="test-games.html"class="active">TEST GAMES</a></li>
             <li><a href="about.html">ABOUT US</a></li>
             <li><a href="contact.html">CONTACT US</a></li>
           </ul>
@@ -115,10 +115,12 @@
             
             <div id="success-message" class="success-message"></div>
             <div id="error-message" class="error-message"></div>
+            
           </div>
         </div>
       </div>
-      <!-- Download Games Section Title -->
+      
+       <!-- Download Games Section Title -->
 <div class="download-games-title">
   <div class="title-line"></div>
   <h3>TẢI GAME BÊN DƯỚI</h3>
@@ -152,6 +154,15 @@
   <footer>
     <p>&copy; 2025 Artoon Games. All rights reserved.</p>
   </footer>
+  <!-- Scroll Down Arrow -->
+  <div class="scroll-arrow" onclick="document.getElementById('games-container').scrollIntoView({behavior: 'smooth'})">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M19 12l-7 7-7-7"/>
+    </svg>
+  </div>
+  
+  <!-- Floating Contact Button -->
+  <a href="contact.html" class="floating-contact" aria-label="Contact Us">
   
   <!-- Floating Contact Button -->
   <a href="contact.html" class="floating-contact" aria-label="Contact Us">
@@ -411,6 +422,25 @@
         joinGroupWithAPI();
       }
     });
+    // ==========================================
+    // SCROLL ARROW VISIBILITY - THÊM VÀO ĐÂY
+    // ==========================================
+    window.addEventListener('scroll', function() {
+      const scrollArrow = document.querySelector('.scroll-arrow');
+      const footer = document.querySelector('footer');
+      
+      if (!scrollArrow || !footer) return;
+      
+      const footerTop = footer.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      
+      // Ẩn mũi tên khi footer xuất hiện trên màn hình
+      if (footerTop <= windowHeight) {
+        scrollArrow.classList.add('hidden');
+      } else {
+        scrollArrow.classList.remove('hidden');
+      }
+    });
     
     // ==========================================
     // GAME SEARCH FUNCTIONALITY
@@ -473,5 +503,6 @@
       });
     }
   </script>
+
 </body>
 </html>
