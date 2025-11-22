@@ -2115,61 +2115,59 @@ footer p {
   }
 }
 /* =====================================
-   SCROLL HINT - Đơn giản và đẹp
+   FLOATING SCROLL HINT - Icon Only
 ===================================== */
 
-/* Chỉ cần mũi tên bounce dưới form */
-.group-form {
-    position: relative !important;
-    padding-bottom: 60px !important;
-}
-
-.group-form::after {
+/* Floating arrow - Luôn hiện */
+body::after {
     content: '⬇️' !important;
-    display: block !important;
-    text-align: center !important;
-    font-size: 40px !important;
-    margin-top: 30px !important;
-    animation: bounce 2s infinite !important;
-    opacity: 0.6 !important;
+    position: fixed !important;
+    bottom: 100px !important;
+    right: 30px !important;
+    width: 55px !important;
+    height: 55px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    font-size: 28px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5) !important;
+    z-index: 998 !important;
+    cursor: pointer !important;
+    animation: bounceUpDown 2s infinite !important;
+    transition: all 0.3s ease !important;
 }
 
-@keyframes bounce {
+body::after:hover {
+    transform: scale(1.1) !important;
+}
+
+@keyframes bounceUpDown {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
-        opacity: 0.6;
     }
     40% {
         transform: translateY(-12px);
-        opacity: 1;
     }
     60% {
         transform: translateY(-6px);
-        opacity: 0.8;
     }
 }
 
-/* Fade effect ở cuối panel */
-.group-panel {
-    position: relative !important;
-    padding-bottom: 80px !important;
-}
-
-.group-panel::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 80px !important;
-    background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(245, 245, 245, 0.8) 70%,
-        rgba(245, 245, 245, 1) 100%
-    ) !important;
-    pointer-events: none !important;
+/* Ẩn khi scroll đến games */
+.games-heading:target ~ * body::after {
+    opacity: 0 !important;
 }
 
 /* Mobile */
-@m
+@media (max-width: 768px) {
+    body::after {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 24px !important;
+        bottom: 85px !important;
+        right: 20px !important;
+    }
+}
