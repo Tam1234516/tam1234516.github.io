@@ -2115,59 +2115,176 @@ footer p {
   }
 }
 /* =====================================
-   FLOATING SCROLL HINT - Icon Only
+   SCROLL HINT - Chevron Fade Style
+   Mũi tên chevron trong suốt, mờ dần phía dưới
 ===================================== */
 
-/* Floating arrow - Luôn hiện */
-body::after {
-    content: '⬇️' !important;
-    position: fixed !important;
-    bottom: 100px !important;
-    right: 30px !important;
-    width: 55px !important;
-    height: 55px !important;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    color: white !important;
-    font-size: 28px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5) !important;
-    z-index: 998 !important;
-    cursor: pointer !important;
-    animation: bounceUpDown 2s infinite !important;
-    transition: all 0.3s ease !important;
+/* Đảm bảo group-panel có position relative */
+.group-panel {
+    position: relative !important;
+    padding-bottom: 90px !important;
 }
 
-body::after:hover {
-    transform: scale(1.1) !important;
+/* Double Chevron - Mũi tên thứ nhất */
+.group-panel::before {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 25px !important;
+    left: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-left: 3px solid rgba(0, 123, 255, 0.6) !important;
+    border-bottom: 3px solid rgba(0, 123, 255, 0.6) !important;
+    transform: translateX(-50%) rotate(-45deg) !important;
+    animation: chevronBounce 2s infinite !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+    display: block !important;
 }
 
-@keyframes bounceUpDown {
+/* Double Chevron - Mũi tên thứ hai (opacity thấp hơn) */
+.group-panel .group-panel-content::before {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -25px !important;
+    left: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-left: 3px solid rgba(0, 123, 255, 0.3) !important;
+    border-bottom: 3px solid rgba(0, 123, 255, 0.3) !important;
+    transform: translateX(-50%) rotate(-45deg) !important;
+    animation: chevronBounce 2s infinite 0.3s !important;
+    z-index: 9 !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+/* Animation bounce mượt mà */
+@keyframes chevronBounce {
     0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
+        transform: translateX(-50%) rotate(-45deg) translateY(0);
+        opacity: 1;
     }
     40% {
-        transform: translateY(-12px);
+        transform: translateX(-50%) rotate(-45deg) translateY(-15px);
+        opacity: 0.6;
     }
     60% {
-        transform: translateY(-6px);
+        transform: translateX(-50%) rotate(-45deg) translateY(-8px);
+        opacity: 0.85;
     }
 }
 
-/* Ẩn khi scroll đến games */
-.games-heading:target ~ * body::after {
-    opacity: 0 !important;
+/* Fade gradient overlay - Hiệu ứng mờ dần */
+.group-panel .group-panel-content::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -40px !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 120px !important;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 15%,
+        rgba(255, 255, 255, 0.2) 35%,
+        rgba(255, 255, 255, 0.5) 60%,
+        rgba(255, 255, 255, 0.85) 85%,
+        rgba(255, 255, 255, 1) 100%
+    ) !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    display: block !important;
 }
 
-/* Mobile */
+/* Ẩn chevron khi scroll đến gần footer */
+/* Khi footer xuất hiện trong viewport */
+footer:hover ~ main .group-panel::before,
+footer:hover ~ main .group-panel .group-panel-content::before {
+    opacity: 0 !important;
+    transition: opacity 0.6s ease !important;
+}
+
+/* Sử dụng :target để detect */
+footer:target ~ main .group-panel::before,
+footer:target ~ main .group-panel .group-panel-content::before {
+    display: none !important;
+}
+
+/* Ẩn khi scroll đến games section */
+.download-games-title:focus-within ~ * .group-panel::before,
+.download-games-title:focus-within ~ * .group-panel .group-panel-content::before,
+#games-container:target ~ .group-panel::before,
+#games-container:target ~ .group-panel .group-panel-content::before {
+    opacity: 0 !important;
+    transition: opacity 0.5s ease !important;
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    body::after {
-        width: 50px !important;
-        height: 50px !important;
-        font-size: 24px !important;
-        bottom: 85px !important;
-        right: 20px !important;
+    .group-panel {
+        padding-bottom: 80px !important;
+    }
+    
+    .group-panel::before,
+    .group-panel .group-panel-content::before {
+        width: 35px !important;
+        height: 35px !important;
+        border-width: 2.5px !important;
+    }
+    
+    .group-panel::before {
+        bottom: 20px !important;
+    }
+    
+    .group-panel .group-panel-content::before {
+        bottom: -20px !important;
+    }
+    
+    .group-panel .group-panel-content::after {
+        height: 100px !important;
+    }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .group-panel {
+        padding-bottom: 85px !important;
+    }
+    
+    .group-panel::before,
+    .group-panel .group-panel-content::before {
+        width: 38px !important;
+        height: 38px !important;
+    }
+    
+    .group-panel .group-panel-content::after {
+        height: 110px !important;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .group-panel {
+        padding-bottom: 70px !important;
+    }
+    
+    .group-panel::before,
+    .group-panel .group-panel-content::before {
+        width: 32px !important;
+        height: 32px !important;
+        border-width: 2px !important;
+    }
+    
+    .group-panel::before {
+        bottom: 18px !important;
+    }
+    
+    .group-panel .group-panel-content::before {
+        bottom: -18px !important;
+    }
+    
+    .group-panel .group-panel-content::after {
+        height: 90px !important;
     }
 }
