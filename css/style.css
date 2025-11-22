@@ -2176,187 +2176,46 @@ footer p {
 }
 
 /* =====================================
-   SCROLL HINT - Chevron Nhỏ Gọn
-   Tự động ẩn khi scroll
+   SCROLL HINT - Chevron FIX
+   Đảm bảo hiển thị 100%
 ===================================== */
 
-/* Group panel setup */
+/* Group panel và content phải có position relative */
 .group-panel {
     position: relative !important;
-    padding-bottom: 70px !important;
+    padding-bottom: 80px !important;
 }
 
-/* Chevron thứ nhất - Nhỏ hơn */
-.group-panel::before {
+.group-panel-content,
+.group-form {
+    position: relative !important;
+}
+
+/* Chevron thứ nhất - Đặt TRỰC TIẾP trong group-form */
+.group-form::after {
     content: '' !important;
     position: absolute !important;
-    bottom: 15px !important;
+    bottom: -45px !important;
     left: 50% !important;
-    width: 24px !important;
-    height: 24px !important;
-    border-left: 2px solid rgba(0, 123, 255, 0.5) !important;
-    border-bottom: 2px solid rgba(0, 123, 255, 0.5) !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-left: 2.5px solid rgba(0, 123, 255, 0.6) !important;
+    border-bottom: 2.5px solid rgba(0, 123, 255, 0.6) !important;
     transform: translateX(-50%) rotate(-45deg) !important;
-    animation: chevronFade 2s infinite !important;
-    z-index: 10 !important;
+    animation: chevronBounce 2s ease-in-out infinite !important;
+    z-index: 999 !important;
     pointer-events: none !important;
     display: block !important;
-    transition: opacity 0.5s ease !important;
 }
 
 /* Chevron thứ hai - Mờ hơn */
-.group-panel .group-panel-content::before {
+.join-button::after {
     content: '' !important;
     position: absolute !important;
-    bottom: -15px !important;
+    bottom: -55px !important;
     left: 50% !important;
-    width: 24px !important;
-    height: 24px !important;
-    border-left: 2px solid rgba(0, 123, 255, 0.25) !important;
-    border-bottom: 2px solid rgba(0, 123, 255, 0.25) !important;
-    transform: translateX(-50%) rotate(-45deg) !important;
-    animation: chevronFade 2s infinite 0.3s !important;
-    z-index: 9 !important;
-    pointer-events: none !important;
-    display: block !important;
-    transition: opacity 0.5s ease !important;
-}
-
-/* Animation nhẹ nhàng hơn */
-@keyframes chevronFade {
-    0%, 100% {
-        transform: translateX(-50%) rotate(-45deg) translateY(0);
-        opacity: 0.5;
-    }
-    50% {
-        transform: translateX(-50%) rotate(-45deg) translateY(-8px);
-        opacity: 1;
-    }
-}
-
-/* Fade gradient - Mờ dần tự nhiên */
-.group-panel .group-panel-content::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: -30px !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 80px !important;
-    background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(245, 245, 245, 0.3) 40%,
-        rgba(245, 245, 245, 0.7) 70%,
-        rgba(245, 245, 245, 1) 100%
-    ) !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-    display: block !important;
-}
-
-/* ẨN CHEVRON KHI SCROLL XUỐNG */
-
-/* Khi user bắt đầu scroll, ẩn chevron */
-body:not(:hover) .group-panel::before,
-body:not(:hover) .group-panel .group-panel-content::before {
-    animation-play-state: paused !important;
-}
-
-/* Ẩn khi scroll đến games section */
-.download-games-title ~ * .group-panel::before,
-.download-games-title ~ * .group-panel .group-panel-content::before {
-    opacity: 0 !important;
-    display: none !important;
-}
-
-/* Ẩn khi games container visible */
-body:has(#games-container) .group-panel::before,
-body:has(#games-container) .group-panel .group-panel-content::before {
-    opacity: 0 !important;
-}
-
-/* Ẩn khi scroll qua 50% viewport height */
-@media (min-height: 600px) {
-    .group-panel:not(:target)::before,
-    .group-panel:not(:target) .group-panel-content::before {
-        opacity: 0 !important;
-        transition: opacity 0.3s ease !important;
-    }
-}
-
-/* Mobile - Nhỏ hơn nữa */
-@media (max-width: 768px) {
-    .group-panel {
-        padding-bottom: 60px !important;
-    }
-    
-    .group-panel::before,
-    .group-panel .group-panel-content::before {
-        width: 20px !important;
-        height: 20px !important;
-        border-width: 1.5px !important;
-    }
-    
-    .group-panel::before {
-        bottom: 12px !important;
-    }
-    
-    .group-panel .group-panel-content::before {
-        bottom: -12px !important;
-    }
-    
-    .group-panel .group-panel-content::after {
-        height: 60px !important;
-    }
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-    .group-panel {
-        padding-bottom: 65px !important;
-    }
-    
-    .group-panel::before,
-    .group-panel .group-panel-content::before {
-        width: 22px !important;
-        height: 22px !important;
-    }
-    
-    .group-panel .group-panel-content::after {
-        height: 70px !important;
-    }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-    .group-panel {
-        padding-bottom: 55px !important;
-    }
-    
-    .group-panel::before,
-    .group-panel .group-panel-content::before {
-        width: 18px !important;
-        height: 18px !important;
-        border-width: 1.5px !important;
-    }
-    
-    .group-panel::before {
-        bottom: 10px !important;
-    }
-    
-    .group-panel .group-panel-content::before {
-        bottom: -10px !important;
-    }
-    
-    .group-panel .group-panel-content::after {
-        height: 50px !important;
-    }
-}
-
-/* Ẩn hoàn toàn khi đã thấy games */
-.games-heading:target ~ .group-panel::before,
-.games-heading:target ~ .group-panel .group-panel-content::before,
-#games-container:hover ~ .group-panel::before,
-#games-container:hover ~ .group-panel .group-panel-content::before {
-    display: none !important;
-}
+    width: 28px !important;
+    height: 28px !important;
+    border-left: 2.5px solid rgba(0, 123, 255, 0.3) !important;
+    border-bottom: 2.5px solid rgba(0, 123, 255, 0.3) !important;
+    transform: translateX(-50%) rotate(-45deg) !i
