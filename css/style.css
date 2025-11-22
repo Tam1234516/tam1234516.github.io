@@ -2115,106 +2115,129 @@ footer p {
   }
 }
 /* =====================================
-   SCROLL INDICATOR - Báo hiệu có nội dung bên dưới
+   SCROLL INDICATOR - Visual Hint Phía Dưới
 ===================================== */
 
-/* Thêm fade gradient ở cuối group panel */
+/* Đảm bảo group-panel có position relative */
+.group-panel {
+    position: relative !important;
+    padding-bottom: 80px !important;
+    overflow: visible !important;
+}
+
+/* Fade gradient overlay ở cuối */
 .group-panel::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 100px !important;
     background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(255, 255, 255, 0.3) 30%,
-        rgba(255, 255, 255, 0.7) 70%,
-        rgba(255, 255, 255, 0.95) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
+        rgba(255, 255, 255, 0.5) 40%,
+        rgba(255, 255, 255, 0.9) 80%,
+        rgba(255, 255, 255, 1) 100%
+    ) !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+    display: block !important;
 }
 
-/* Thêm nút mũi tên xuống bounce */
-.group-panel {
-    position: relative;
-    padding-bottom: 60px !important;
+/* Mũi tên bounce indicator */
+.group-panel .group-panel-content::after {
+    content: '⬇️' !important;
+    position: absolute !important;
+    bottom: -50px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    font-size: 48px !important;
+    color: #007bff !important;
+    animation: bounceArrow 2s infinite !important;
+    z-index: 10 !important;
+    display: block !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
 }
 
-.group-panel::before {
-    content: '⬇';
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 32px;
-    color: var(--primary-blue);
-    animation: bounce 2s infinite;
-    z-index: 2;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    cursor: pointer;
+/* Hoặc dùng text hint */
+.group-panel-content::before {
+    content: 'Vuốt xuống để xem game 👇' !important;
+    position: absolute !important;
+    bottom: -45px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: #007bff !important;
+    color: white !important;
+    padding: 12px 30px !important;
+    border-radius: 30px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    box-shadow: 0 4px 20px rgba(0,123,255,0.4) !important;
+    animation: pulseScale 2s infinite !important;
+    z-index: 10 !important;
+    display: block !important;
 }
 
 /* Animation bounce */
-@keyframes bounce {
+@keyframes bounceArrow {
     0%, 20%, 50%, 80%, 100% {
         transform: translateX(-50%) translateY(0);
     }
     40% {
-        transform: translateX(-50%) translateY(-10px);
+        transform: translateX(-50%) translateY(-15px);
     }
     60% {
-        transform: translateX(-50%) translateY(-5px);
+        transform: translateX(-50%) translateY(-8px);
     }
 }
 
-/* Hoặc dùng text thay vì icon */
-/* Bỏ comment dòng dưới nếu muốn chữ thay vì mũi tên */
-/*
-.group-panel::before {
-    content: 'Vuốt xuống để xem game ⬇';
-    font-size: 14px;
-    font-weight: 600;
-    padding: 8px 20px;
-    background: var(--primary-blue);
-    color: white;
-    border-radius: 20px;
-}
-*/
-
-/* Ẩn indicator khi scroll gần đến games */
-body:has(.download-games-title:target) .group-panel::before,
-body:has(.download-games-title:target) .group-panel::after {
-    opacity: 0;
-    transition: opacity 0.3s;
+/* Animation pulse scale */
+@keyframes pulseScale {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.05);
+        opacity: 1;
+    }
 }
 
-/* Mobile - Nhỏ hơn */
+/* Mobile */
 @media (max-width: 768px) {
-    .group-panel::after {
-        height: 60px;
-    }
-    
-    .group-panel::before {
-        font-size: 28px;
-        bottom: 8px;
-    }
-    
     .group-panel {
-        padding-bottom: 50px !important;
+        padding-bottom: 70px !important;
+    }
+    
+    .group-panel::after {
+        height: 80px !important;
+    }
+    
+    .group-panel-content::after {
+        font-size: 40px !important;
+        bottom: -45px !important;
+    }
+    
+    .group-panel-content::before {
+        font-size: 12px !important;
+        padding: 10px 24px !important;
+        bottom: -40px !important;
     }
 }
 
 /* Tablet */
 @media (max-width: 1024px) {
-    .group-panel::after {
-        height: 70px;
+    .group-panel {
+        padding-bottom: 75px !important;
     }
     
-    .group-panel::before {
-        font-size: 30px;
+    .group-panel-content::after {
+        font-size: 44px !important;
+    }
+    
+    .group-panel-content::before {
+        font-size: 13px !important;
     }
 }
-
