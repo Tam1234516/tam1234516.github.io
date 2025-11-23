@@ -87,22 +87,89 @@
   <!-- JavaScript -->
   <script>
     // ==========================================
-    // BLOG POSTS DATA - SAME AS blog.html
+    // LOAD BLOG POST DETAIL FROM JSON
     // ==========================================
     let blogPosts = [];
-
-async function loadBlogPosts() {
-  try {
-    const response = await fetch('data/blog-posts.json');
-    blogPosts = await response.json();
     
-    // existing rendering code
-    const container = document.getElementById('blog-posts-container');
-    // ... rest of code
-  } catch (error) {
-    console.log('Could not load blog posts:', error);
-  }
-}
+    async function loadBlogPostDetail() {
+      try {
+        const response = await fetch('data/blogs.json');
+        blogPosts = await response.json();
+        
+        // Lấy post ID từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+        
+        if (!postId) {
+          showPostNotFound();
+          return;
+        }
+        
+        // Tìm post theo ID
+        const post = blogPosts.find(p => p.id === postId);
+        
+        if (!post || !post.isPublished) {
+          showPostNotFound();
+          return;
+        }
+        
+        renderBlogPost(post);
+      } catch (error) {
+        console.log('Could not load blog post:', error);
+        showPostNotFound();
+      }
+    }
+    
+    // ==========================================
+    // RENDER BLOG POST
+    // ==========================================
+    function renderBlogPost(post) {
+      const contentContainer = document.getElementById('blog-post-content');
+      
+      contentContainer.innerHTML = `
+        <div class="blog-detail-header">
+          <div class="blog-detail-category">${post.category}</div>
+          <h1 class="blog-detail-title">${post.title}</h1>
+          <div class="blog-detail-meta">
+            <span class="blog-detail-date">📅 ${post.date}</span>
+            <span class="blog-detail-author">✍️ ${post.author}</span>
+          </div>
+        </div>
+        
+        <div class="blog-detail-image">
+          <img src="${post.image}" alt="${post.title}" loading="lazy" />
+        </div>
+        
+        <div class="blog-detail-content">
+          ${post.content}
+        </div>
+        
+        <div class="blog-detail-footer">
+          <button onclick="window.location.href='blog.html'" class="back-button">
+            ← Back to Blog
+          </button>
+          <div class="blog-detail-share">
+            <span>Share:</span>
+            <a href="https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank">Facebook</a>
+            <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}" target="_blank">Twitter</a>
+          </div>
+        </div>
+      `;
+      
+      // Update page title
+      document.title = `${post.title} - Artoon Games`;
+    }
+    
+    // ==========================================
+    // SHOW POST NOT FOUND
+    // ==========================================
+    function showPostNotFound() {
+      const contentContainer = document.getElementById('blog-post-content');
+      const notFoundContainer = document.getElementById('post-not-found');
+      
+      contentContainer.style.display = 'none';
+      notFoundContainer.style.display = 'block';
+    }
     
     // ==========================================
     // Mobile Menu Toggle
@@ -202,84 +269,6 @@ async function loadBlogPosts() {
         childList: true,
         subtree: true
       });
-    }
-    
-    // ==========================================
-    // LOAD BLOG POST DETAIL
-    // ==========================================
-    function loadBlogPostDetail() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const postId = urlParams.get('id');
-      
-      const contentContainer = document.getElementById('blog-post-content');
-      const notFoundContainer = document.getElementById('post-not-found');
-      
-      if (!postId) {
-        showPostNotFound();
-        return;
-      }
-      
-      // Find post by ID
-      const post = blogPosts.find(p => p.id === postId);
-      
-      if (!post) {
-        showPostNotFound();
-        return;
-      }
-      
-      // Render post content
-      renderBlogPost(post);
-    }
-    
-    // ==========================================
-    // RENDER BLOG POST
-    // ==========================================
-    function renderBlogPost(post) {
-      const contentContainer = document.getElementById('blog-post-content');
-      
-      contentContainer.innerHTML = `
-        <div class="blog-detail-header">
-          <div class="blog-detail-category">${post.category}</div>
-          <h1 class="blog-detail-title">${post.title}</h1>
-          <div class="blog-detail-meta">
-            <span class="blog-detail-date">📅 ${post.date}</span>
-            <span class="blog-detail-author">✍️ ${post.author}</span>
-          </div>
-        </div>
-        
-        <div class="blog-detail-image">
-          <img src="${post.image}" alt="${post.title}" />
-        </div>
-        
-        <div class="blog-detail-content">
-          ${post.content}
-        </div>
-        
-        <div class="blog-detail-footer">
-          <button onclick="window.location.href='blog.html'" class="back-button">
-            ← Back to Blog
-          </button>
-          <div class="blog-detail-share">
-            <span>Share:</span>
-            <a href="https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" rel="noopener noreferrer">Facebook</a>
-            <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener noreferrer">Twitter</a>
-          </div>
-        </div>
-      `;
-      
-      // Update page title
-      document.title = `${post.title} - Artoon Games`;
-    }
-    
-    // ==========================================
-    // SHOW POST NOT FOUND
-    // ==========================================
-    function showPostNotFound() {
-      const contentContainer = document.getElementById('blog-post-content');
-      const notFoundContainer = document.getElementById('post-not-found');
-      
-      contentContainer.style.display = 'none';
-      notFoundContainer.style.display = 'block';
     }
   </script>
 </body>
