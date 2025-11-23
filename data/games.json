@@ -4,7 +4,7 @@
     "name": "Game Demo 1",
     "description": "Đây là game demo đầu tiên. Bạn có thể sửa thông tin này sau.",
     "category": "Action",
-    "icon": "images/game-icon.png",
+    "icon": "images/games/game-000-icon.png",
     "promo": "images/game-promo.jpg",
     "googlePlay": "https://play.google.com/store",
     "testLink": "https://play.google.com/store",
