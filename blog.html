@@ -101,23 +101,69 @@
   <!-- JavaScript -->
   <script>
     // ==========================================
-    // BLOG POSTS DATA - Thêm blog posts vào đây
+    // LOAD BLOG POSTS FROM JSON
     // ==========================================
     let blogPosts = [];
-
-async function loadBlogPosts() {
-  try {
-    const response = await fetch('data/blog-posts.json');
-    blogPosts = await response.json();
     
-    // existing rendering code
-    const container = document.getElementById('blog-posts-container');
-    // ... rest of code
-  } catch (error) {
-    console.log('Could not load blog posts:', error);
-  }
-}
+    async function loadBlogPosts() {
+      try {
+        const response = await fetch('data/blogs.json');
+        const allPosts = await response.json();
+        
+        // Lọc posts đã published
+        blogPosts = allPosts.filter(post => post.isPublished);
+        
+        renderBlogPosts(blogPosts);
+      } catch (error) {
+        console.log('Could not load blog posts:', error);
+        document.getElementById('no-posts-message').style.display = 'block';
+      }
+    }
     
+    // ==========================================
+    // RENDER BLOG POSTS
+    // ==========================================
+    function renderBlogPosts(posts) {
+      const container = document.getElementById('blog-posts-container');
+      const noPostsMessage = document.getElementById('no-posts-message');
+      
+      if (!container) return;
+      
+      if (posts.length === 0) {
+        container.innerHTML = '';
+        if (noPostsMessage) noPostsMessage.style.display = 'block';
+        return;
+      }
+      
+      if (noPostsMessage) noPostsMessage.style.display = 'none';
+      
+      container.innerHTML = posts.map(post => `
+        <article class="blog-card" onclick="viewBlogPost('${post.id}')">
+          <div class="blog-card-image">
+            <img src="${post.image}" alt="${post.title}" loading="lazy" />
+            <div class="blog-card-category">${post.category}</div>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">
+              <span class="blog-date">📅 ${post.date}</span>
+              <span class="blog-author">✍️ ${post.author}</span>
+            </div>
+            <h3 class="blog-card-title">${post.title}</h3>
+            <p class="blog-card-excerpt">${post.excerpt}</p>
+            <div class="blog-card-footer">
+              <span class="read-more">Read More →</span>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+    
+    // ==========================================
+    // VIEW BLOG POST DETAIL
+    // ==========================================
+    function viewBlogPost(postId) {
+      window.location.href = `blog-detail.html?id=${postId}`;
+    }    
     // ==========================================
     // Mobile Menu Toggle
     // ==========================================
