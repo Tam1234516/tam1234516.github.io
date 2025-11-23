@@ -443,10 +443,90 @@
     });
     
     // ==========================================
+    // LOAD GAMES FROM JSON - VỚI LOAD MORE
+    // ==========================================
+    let gamesData = [];
+    let currentPage = 1;
+    const gamesPerPage = 10; // Số games hiển thị mỗi lần
+
+    async function loadGames() {
+      try {
+        const response = await fetch('data/games.json');
+        const allGames = await response.json();
+        
+        // Lọc games đã published và là test games
+        gamesData = allGames.filter(game => game.isPublished && game.isTest);
+        
+        // Reset về trang 1
+        currentPage = 1;
+        renderGames();
+      } catch (error) {
+        console.log('Could not load games:', error);
+      }
+    }
+
+    function renderGames() {
+      const container = document.getElementById('games-container');
+      if (!container) return;
+      
+      if (gamesData.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#666;padding:40px;">Chưa có game nào.</p>';
+        return;
+      }
+      
+      // Lấy số games cần hiển thị
+      const gamesToShow = gamesData.slice(0, currentPage * gamesPerPage);
+      
+      // Render game cards
+      let html = gamesToShow.map(game => `
+        <div class="game-card" id="${game.id}">
+          <div class="game-icon">
+            <img src="${game.icon}" alt="${game.name} Icon" loading="lazy" />
+          </div>
+          <div class="game-info">
+            <h3>${game.name}</h3>
+            <p>${game.description}</p>
+            <div class="download-buttons">
+              <a href="${game.testLink}" target="_blank" rel="noopener noreferrer">
+                GET IT ON Google Play
+              </a>
+            </div>
+          </div>
+          <div class="game-promo">
+            <img src="${game.promo}" alt="${game.name} Promo" loading="lazy" />
+          </div>
+        </div>
+      `).join('');
+      
+      // Thêm nút Load More nếu còn games chưa hiển thị
+      if (gamesToShow.length < gamesData.length) {
+        const remaining = gamesData.length - gamesToShow.length;
+        html += `
+          <div class="load-more-container">
+            <button class="load-more-btn" onclick="loadMoreGames()">
+              📱 Xem thêm ${Math.min(gamesPerPage, remaining)} games nữa
+            </button>
+            <p class="games-count">Đang hiển thị ${gamesToShow.length} / ${gamesData.length} games</p>
+          </div>
+        `;
+      }
+      
+      container.innerHTML = html;
+    }
+
+    function loadMoreGames() {
+      currentPage++;
+      renderGames();
+      
+      // Scroll xuống một chút để thấy games mới
+      setTimeout(() => {
+        window.scrollBy({ top: 200, behavior: 'smooth' });
+      }, 100);
+    }
+
+    // ==========================================
     // GAME SEARCH FUNCTIONALITY
     // ==========================================
-    const gamesData = [];
-    
     const searchInput = document.getElementById('game-search');
     const searchResults = document.getElementById('search-results');
     
@@ -461,7 +541,7 @@
         }
         
         if (gamesData.length === 0) {
-          searchResults.innerHTML = '<div class="search-no-results">No games available yet. Add games in games.json</div>';
+          searchResults.innerHTML = '<div class="search-no-results">Chưa có game nào.</div>';
           searchResults.classList.remove('hidden');
           return;
         }
@@ -474,8 +554,8 @@
         
         if (filtered.length > 0) {
           searchResults.innerHTML = filtered.map(game => `
-            <a href="${game.links.testGame}" class="search-result-item">
-              <img src="${game.images.icon}" alt="${game.name}" class="search-result-icon" />
+            <a href="${game.testLink}" class="search-result-item" target="_blank">
+              <img src="${game.icon}" alt="${game.name}" class="search-result-icon" />
               <div class="search-result-info">
                 <div class="search-result-name">${game.name}</div>
                 <div class="search-result-category">${game.category}</div>
@@ -484,7 +564,7 @@
           `).join('');
           searchResults.classList.remove('hidden');
         } else {
-          searchResults.innerHTML = '<div class="search-no-results">No games found</div>';
+          searchResults.innerHTML = '<div class="search-no-results">Không tìm thấy game</div>';
           searchResults.classList.remove('hidden');
         }
       });
@@ -502,6 +582,9 @@
         }
       });
     }
+    
+    // Load games khi trang load xong
+    document.addEventListener('DOMContentLoaded', loadGames);
   </script>
 
 </body>
